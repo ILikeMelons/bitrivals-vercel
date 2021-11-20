@@ -1,0 +1,1 @@
+export { default as dota } from './dota.svg';

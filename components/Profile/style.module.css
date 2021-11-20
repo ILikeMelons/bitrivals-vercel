@@ -1,0 +1,13 @@
+.content{
+    background-image:url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position:center;
+  }
+
+  .content:hover{
+      background-image:
+      linear-gradient(to right,
+       rgba(82, 83, 82, 0.801), hsla(0, 0%, 33%, 0.801) ),
+       url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png');
+  }

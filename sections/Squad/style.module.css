@@ -1,0 +1,16 @@
+.backgroundText {
+    -webkit-text-stroke-color: #1e2534;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-fill-color: transparent;
+    transform: rotate(-90deg) translateX(-30vw);
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    bottom: 620px;
+    transform-origin: 0 0;
+    font-size: 180px;
+    line-height: 140px;
+}
+
+

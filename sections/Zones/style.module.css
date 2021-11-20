@@ -1,0 +1,28 @@
+.heroMask {
+    left: 0px;
+    right: auto;
+    width: 1998px;
+    transform: translateX(10px);
+    top: 66px;
+    height: 1400px;
+    -webkit-clip-path: polygon(49% 0%, 100% -41%, 10% 100%, 41% 100%, 0% 28%);
+    clip-path: polygon(44% 0%, -31% -53%, 79% 102%, 96% 100%, 96% 74%);
+    transform: translateX(-1436px) translateY(-485px);
+    z-index: 1;
+    background-position: -419px 0px;
+    background-size: 2676px 1305px;
+}
+
+.backgroundText {
+    -webkit-text-stroke-color: #1e2534;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-fill-color: transparent;
+    transform: rotate(270deg) translateY(0vw);
+    position: absolute;
+    top: 50%;
+    left: auto;
+    right: -250px;
+    font-size: 160px;
+    bottom: 0;
+    transform-origin: 0 0;
+}

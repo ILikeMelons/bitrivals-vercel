@@ -1,0 +1,28 @@
+
+
+.backgroundText {
+    -webkit-text-stroke-color: #1e2534;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-fill-color: transparent;
+    transform: rotate(-90deg) translateY(0vw) ;
+    position: absolute;
+    top:50%;
+    left: 0;
+    right: auto;
+    bottom: 0;
+    transform-origin: 0 0;
+}
+
+.heroMask {
+    width: 1814px;
+    height: 1384px;
+    -webkit-clip-path: polygon(49% -41%, 100% -41%, 28% 100%, 0 100%, 0% 50%);
+    clip-path: polygon(77% -41%, 180% -111%, 28% 90%, 0 90%, 0% 60%);
+    transform: translateX(872px) translateY(-51px);
+    opacity: 0.12;
+}
+
+
+@media screen and (max-width: 900px){
+    
+}
