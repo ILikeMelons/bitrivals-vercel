@@ -6,7 +6,7 @@ import { discord, github, telegram, twitter, instagram, reddit } from '../public
 const links = [
     {
         image : discord.src,
-        link : 'https://discord.gg/nc7ST6eP'
+        link : 'https://discord.com/invite/bitrivals'
     },
     {
         image : telegram.src,
