@@ -147,7 +147,8 @@ const About = ({variant, user}) => {
               </div>
             </div>
           </div>
-          : <Register user={user} /> }
+          : ''//</section><Register user={user} /> 
+        }
           
         </Container>
         {variant == 'token' ? '' : <Banner /> }
