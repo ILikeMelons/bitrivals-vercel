@@ -34,3 +34,20 @@ export const verifyEmail = async(email) => {
 
         return res;
 }
+
+export  const SubscribeEmail = async(email) =>{
+  const response = await fetch('/api/registerSubscriber',{
+      body: JSON.stringify({
+          email: email
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+  })
+
+  const result = await response.json();
+
+  return result.valid;
+ 
+}  

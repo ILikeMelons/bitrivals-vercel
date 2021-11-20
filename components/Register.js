@@ -2,7 +2,7 @@ import supabase from '../utils/supabaseClient'
 import {Formik, Form, Field } from "formik";
 import router, {useRouter} from 'next/router'
 import {Step1, Step2, Step3} from './RegistrationSteps'
-import {addWalletAddress, verifyEmail} from './../requests/registration'
+import {addWalletAddress, verifyEmail, SubscribeEmail} from './../requests/registration'
 import {insertInvitation, saveInvitation, callIncrement} from './../requests/invitation'
 import { getCode } from '../requests/profile';
 import  getInvitationCode  from '../hooks/getInvitationCode';
@@ -18,7 +18,7 @@ const Register = ({user}) => {
   const [currentRegistration, setCurrentRegistation] = useState('');
   const inviteCode = getInvitationCode();
   const SubmitFirstStep = async(value) => {
-
+  const newsletterRegistration= await SubscribeEmail(value.email)
    const verify = await verifyEmail(value.email);
    const email = await verify.json();
    console.log(email)
@@ -52,6 +52,7 @@ const Register = ({user}) => {
       })
       
       const res = await invitation;
+     
      console.log(res);
       if(res.shareCode !== undefined){
         setCurrentRegistation(res.shareCode)
