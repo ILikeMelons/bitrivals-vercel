@@ -71,13 +71,9 @@ const Register = ({user}) => {
       }).catch(e=>{
          return e;
       })
-     const result = await response;
      
-    if(result.status == 200){
-      next();
-      
-      
-    }
+     next();
+    
   }
 
   const SubmitThirdStep = () => {
