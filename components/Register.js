@@ -6,6 +6,7 @@ import {addWalletAddress, verifyEmail, SubscribeEmail} from './../requests/regis
 import {insertInvitation, saveInvitation, callIncrement} from './../requests/invitation'
 import { getCode } from '../requests/profile';
 import  getInvitationCode  from '../hooks/getInvitationCode';
+import ShareButtons from '../components/Blocks/ShareButtons'
 import {useEffect, useState} from 'react'
 import * as Yup from 'yup';
 import { P } from '@storybook/components';
@@ -117,7 +118,10 @@ useEffect(async()=>{
   })
   .catch((e)=>{e})
  const result = await response;
- setUserShareCode(result.invite_id); 
+ if(result !== undefined){
+  setUserShareCode(result.invite_id); 
+ }
+
 },)
   return (
     
@@ -133,8 +137,12 @@ useEffect(async()=>{
       <label className='pt-10 text-gray-300 text-14px'>Your share URL</label>
       <input type="text" value={"Bitrivals.gg/?invite="+userShareCode } id='inviteInput'  className={'text-center  text-pink bg-transparent cursor-pointer ' } onClick={(e)=> {CopyToClipBoard(e)}}/>
       </div>
-     
-\
+      <div className='flex flex-row justify-around pt-10'>
+      
+       <ShareButtons shareCode={userShareCode}/>
+        
+      </div>
+
 
     </div>
   )

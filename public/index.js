@@ -12,3 +12,6 @@ export {default as peach } from './Team/Peach.png'
 export {default as corvo } from './Team/Corvo.png'
 export {default as wallet } from './images/icons/wallet.svg'
 export {default as medal } from './images/icons/medal.svg'
+
+
+export {default as bitrivals} from './bitrivals_icon.svg'

@@ -28,6 +28,7 @@ useEffect(() => {
     <React.Fragment>
       <Head>
       {/*Global site tag (gtag.js) - Google Analytics --> */} 
+      
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MJ3ME1WMT"></script>
       <script
             dangerouslySetInnerHTML={{
