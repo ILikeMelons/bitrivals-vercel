@@ -16,7 +16,7 @@ const SignupSchema = Yup.object().shape({
 
 
 
-const Step1 = ({ submitData, inviteCode }) => {
+const Step1 = ({ submitData, inviteCode, errorMsg }) => {
 
 	const [prevValue, setprevValue] = useState('');
 	const [errorMessage, setErrorMessage] = useState('')
@@ -33,6 +33,7 @@ const Step1 = ({ submitData, inviteCode }) => {
 		<div className="w-full mt-4 md:mt-0">
 	
 			{inviteCode == '' || inviteCode == undefined ? <Header /> : <InvitationHeader />}
+			<p className='text-pink'>{errorMsg}</p>
 			<Formik
 				initialValues={{
 					password: "",
@@ -45,7 +46,7 @@ const Step1 = ({ submitData, inviteCode }) => {
 			
 					setTimeout(() => {
 						actions.setSubmitting(false);
-					  }, 500);
+					  }, 2000);
 				}}
 			>
 				{({ errors, touched, isSubmitting }) => (
@@ -106,7 +107,7 @@ const Step1 = ({ submitData, inviteCode }) => {
 								""
 							)}
 
-							<Field name="rivalID" validate={validateRival} >
+							<Field name="rivalID" >
 								{({ field, meta: { touched, error } }) => (
 									<input
 										className={

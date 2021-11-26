@@ -2,17 +2,12 @@ import { insertWalletAtID } from '../../../backend/Supabase';
 
 
 export default async function registerWallet(req, res){
-     const {address, user} = req.body;
+     const {address, id} = req.body;
   
-    if(!user){
+    if(id.length< 10){
         res.status(401).json({ error:'unauthorized' });
     }
-    const result = insertWalletAtID(address, user.id)
-    .then(response => {
-        return res.status(200).json(response)
-    }).catch(e => {
-        return res.status(402).send(e)
-    })
-
-    return result;	
+    const result = await insertWalletAtID(address, id);
+    console.log(result)
+    return res.status(result.status).json({statusText : result.statusText});	
 }

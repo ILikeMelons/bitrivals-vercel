@@ -48,15 +48,9 @@ export const insertUserShareCode = async(id) => {
 
 
 export const insertWalletAtID = async(wallet, id) => {
-    const {data, error} = await supabase.from('profiles').update({wallet_adress : wallet}).match({id : id})
-
-    if(data){
-        return true
-    }else{
-        return false
-    }
+    const response = await supabase.from('profiles').update({wallet_adress : wallet}).match({id : id})
+    return response;
 }
-
 
 export const insertRivalID = async(userID, rivalID, userEmail) => {
     
@@ -72,13 +66,8 @@ export const insertRivalID = async(userID, rivalID, userEmail) => {
   export const incrementInvitationUse = async(shareCode) => {
     
     const code = shareCode.trim();
-    const response = supabase
-    .rpc('IncrementUseByInviteId',  {inviteid : code}).then(res =>
-        {
-            return res;
-        }).catch(e => {
-            return e;
-        })
+    const response =await supabase
+    .rpc('IncrementUseByInviteId',  {inviteid : code})
 
     return response;
   }
@@ -128,6 +117,19 @@ export const insertRivalID = async(userID, rivalID, userEmail) => {
         email: email,
         password: password,
       })
+      return response;
+  }
+
+  export const signUpUser = async(email, rivalID, password) => {
+    const response = await supabase.auth.signUp({
+        email: email,
+        password: password,
+      },
+      {
+          data: {
+              rivalID:rivalID
+          }
+      });
       return response;
   }
 
