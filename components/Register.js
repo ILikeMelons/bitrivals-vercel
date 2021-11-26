@@ -33,13 +33,14 @@ const Register = ({user}) => {
 
   
    const newUser = await registerUser(value)
-   //console.log(newUser);
+  
   
     if(newUser){
+     
       setCurrentUser(await newUser)
       //console.log(currentUser);
       if(inviteCode!=='' && inviteCode !== null){
-        const saveInvitationresponse = saveInvitation(inviteCode ,newUser.id)
+        const saveInvitationresponse = saveInvitation(inviteCode ,newUser.user.id)
         .then((res)=> {
           return res
         }).catch((e)=>{
@@ -132,7 +133,7 @@ useEffect(async()=>{
       <p className="text-white text-14px pb-5">
         The Rival ID is your gateway to the Bit Rivals ecosystem.
       </p>
-      {rivalID.length == 0 && !loading ? 
+      { !loading && rivalID.length == 0   ? 
       <div className={loading ? "invisible" : "visible"}>
       <p className="text-white text-14px pb-5">
         It seems you didn't select a Rival ID. <br /><br />

@@ -104,6 +104,7 @@ export const insertRivalID = async(userID, rivalID, userEmail) => {
       const response = await supabase.from('invitesUsed').insert([
         {id: id, used_code:shareCode }
     ]);
+
     return response;
   }
 
