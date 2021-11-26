@@ -104,10 +104,11 @@ const Register = ({user}) => {
 
 
 
-const Profile = ({user, rivalID}) => {
+const Profile = ({user}) => {
   const [userShareCode, setUserShareCode ] = useState('')
   const [rivalID, setRivalID] = useState('');
   const [referalUsed, setReferralUsed] = useState(0)
+  const [loading, setloading] = useState(false);
   const CopyToClipBoard = (e) => {
     navigator.clipboard.writeText(e.target.value)
 }
@@ -115,9 +116,11 @@ const Profile = ({user, rivalID}) => {
 
 
 useEffect(async()=>{
-  loadProfile(user.id).then((res)=>{setRivalID(res.rivalID.rivalid)}).catch(e=>{console.log(e)})
-  getCode(user.id).then((res)=>{setUserShareCode(res.invite_id);}).catch((e)=>{console.log(e)})
- 
+  setloading(true);
+  getCode(user.id).then((res)=>{setUserShareCode(res.invite_id);}).then(()=>{loadProfile(user.id, userShareCode).then((res)=>{setRivalID(res.rivalID); setReferralUsed(res.count)}).catch(e=>{console.log(e)})}).catch((e)=>{console.log(e)})
+  
+  
+  setloading(false);
  },[userShareCode,rivalID])
 
 
@@ -129,15 +132,15 @@ useEffect(async()=>{
       <p className="text-white text-14px pb-5">
         The Rival ID is your gateway to the Bit Rivals ecosystem.
       </p>
-      {rivalID == '' ? 
-      <div>
+      {rivalID.length == 0 && !loading ? 
+      <div className={loading ? "invisible" : "visible"}>
       <p className="text-white text-14px pb-5">
         It seems you didn't select a Rival ID. <br /><br />
         Don't worry! Here you can pick your own Rival ID
       </p>
       <LoggedInRegisterID userID={user.id} userEmail={user.email} setUserShareCode={setUserShareCode} setRivalID={setRivalID} />
     </div>
-      :""}
+      : ""}
       
       <div className="flex flex-col">
         <label className="pt-10 text-gray-300 text-14px">Your share URL</label>

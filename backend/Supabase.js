@@ -131,7 +131,7 @@ export const insertRivalID = async(userID, rivalID, userEmail) => {
   }
 
 export const countShareTimes = async(shareCode) => {
-    shareCode = "QkU52HkzUA";
+   
     const response = await supabase.from('invitesUsed').select('*', {count : "exact"}).eq('used_code', shareCode)
     //console.log(response);
     return response;

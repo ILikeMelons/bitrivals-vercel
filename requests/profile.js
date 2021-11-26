@@ -19,21 +19,22 @@ export const getCode = async(id) => {
 }
 
 
-export const loadProfile = async(id) => {
+export const loadProfile = async(id, shareCode) => {
 
   return new Promise(async function(resolve, reject){
-    const loadRivalID = await fetch("/api/profile/load",{
+    const loadProfile= await fetch("/api/profile/load",{
     body: JSON.stringify({
-      id: id
+      id: id,
+      shareCode : shareCode
     }),
     headers: {
       "Content-Type": "application/json",
     },
     method: "POST",
   });
-    const result = await loadRivalID.json();
-    
-    resolve({rivalID : result});
+    const result = await loadProfile.json();
+    console.log(result.rivalID)
+    resolve({rivalID : result.rivalID, count : result.referalCount});
 
   });
 
