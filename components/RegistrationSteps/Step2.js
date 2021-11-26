@@ -30,7 +30,7 @@ const Step2 = ({submitData, rivalID}) => {
           }}
           validationSchema={WalletSchema}
           onSubmit={(values) => {
-            console.log(values);
+            //console.log(values);
             submitData(values);
           }}
         >

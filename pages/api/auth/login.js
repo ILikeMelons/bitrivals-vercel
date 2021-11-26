@@ -1,15 +1,15 @@
 
 
-import { supabase } from "../../../utils/supabaseClient"
+import { signInUser } from "../../../backend/Supabase"
 
 
 export default async function loginUser(req, res) {
     // destructure the e-mail and password received in the request body.
     const { email, password } = req.body
    
-    console.log(email);
+    //console.log(email);
   
-    let { user, error } = await supabase.auth.signIn({
+    let { user, error } = await signInUser({
       email: email,
       password: password,
     })

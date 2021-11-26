@@ -220,7 +220,7 @@ const InvitationHeader = () => {
 
 
 const ValidateRivalID = async(value) => {
-	console.log(value);
+	//console.log(value);
 	if(value.length > 2 ){
 		const response = fetch("/api/auth/validateRivalId", {
 			body: JSON.stringify({

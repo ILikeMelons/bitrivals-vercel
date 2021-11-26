@@ -60,6 +60,7 @@ export const insertWalletAtID = async(wallet, id) => {
 
 export const insertRivalID = async(userID, rivalID, userEmail) => {
     
+  
     return await supabase.from('profiles').insert([
         {id: userID, rivalid: rivalID, user_email : userEmail }
     ]);
@@ -103,8 +104,6 @@ export const insertRivalID = async(userID, rivalID, userEmail) => {
       const response = await supabase.from('invitesUsed').insert([
         {id: id, used_code:shareCode }
     ]);
-
-  
     return response;
   }
 
@@ -112,9 +111,28 @@ export const insertRivalID = async(userID, rivalID, userEmail) => {
   export const getReferralCode = async(id) => {
       const response = await supabase.from('profiles')
       .select('invite_id').eq('id', id).then((res) =>{return res}).catch((e)=>{return e});
-
-   
     return response;
       
   }
 
+  export const getUserRivalID = async(id) => {
+    const response = await supabase.from('profiles')
+    .select('rivalid').eq('id', id).then((res) =>{return res}).catch((e)=>{return e});
+    return response;
+  }
+
+
+  export const signInUser = async(email, password) => {
+      const response = await supabase.auth.signIn({
+        email: email,
+        password: password,
+      })
+      return response;
+  }
+
+export const countShareTimes = async(shareCode) => {
+    shareCode = "QkU52HkzUA";
+    const response = await supabase.from('invitesUsed').select('*', {count : "exact"}).eq('used_code', shareCode)
+    //console.log(response);
+    return response;
+}

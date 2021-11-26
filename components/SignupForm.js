@@ -18,7 +18,7 @@ const registerUser = async value => {
     })
 
     const user = await res.json()
-    console.log(user);
+    //console.log(user);
     if(user){
         if (user) router.push('/');
     }
