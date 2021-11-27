@@ -62,7 +62,6 @@ const Register = ({user}) => {
    {
      user == null  ? 
      <div className="relative z-10 w-full lg:p-12 pt-10 registerMask lg:w-1/2 bg-black-50">
-      {console.log(currentUser)}
      {registrationStep == 1 && <Step1 submitData={SubmitFirstStep} errorMsg={errorMsg} inviteCode={inviteCode} />}
      {registrationStep == 2 && <Step2 submitData={SubmitSecondStep} errorMsg={errorMsg} rivalID={currentUser.user_metadata.rivalID} successMsg={successMsg}/>}
      {registrationStep > 2 && <Step3 submitData={SubmitThirdStep} code={currentRegistration} />}
@@ -79,6 +78,7 @@ const Profile = ({user}) => {
   const [rivalID, setRivalID] = useState('');
   const [referalUsed, setReferralUsed] = useState(0)
   const [loading, setloading] = useState(false);
+  
   const CopyToClipBoard = (e) => {
     navigator.clipboard.writeText(e.target.value)
 }
@@ -86,11 +86,12 @@ const Profile = ({user}) => {
 
 
 useEffect(async()=>{
-  setloading(true);
-  getCode(user.id).then((res)=>{setUserShareCode(res.invite_id);}).then(()=>{loadProfile(user.id, userShareCode).then((res)=>{setRivalID(res.rivalID); setReferralUsed(res.count)}).catch(e=>{console.log(e)})}).catch((e)=>{console.log(e)})
-  
-  
-  setloading(false);
+  if(user){
+    setloading(true);
+    getCode(user.id).then((res)=>{if(res.invite_id !== undefined){setUserShareCode(res.invite_id);}}).then(()=>{loadProfile(user.id, userShareCode).then((res)=>{setRivalID(res.rivalID); setReferralUsed(res.count < 10 ? res.count : 10)}).catch(e=>{console.log(e)})}).catch((e)=>{console.log(e)})
+    setloading(false);
+  }
+ 
  },[userShareCode,rivalID])
 
 
@@ -102,12 +103,13 @@ useEffect(async()=>{
       <p className="text-white text-14px pb-5">
         The Rival ID is your gateway to the Bit Rivals ecosystem.
       </p>
-      { !loading && rivalID.length == 0   ? 
-      <div className={rivalID.length == 0 ? "hidden" : "block"}>
+      { !loading && (rivalID.length == 0 || rivalID == undefined)   ? 
+      <div className={rivalID == undefined ? "hidden" : "block"}>
       <p className="text-white text-14px pb-5">
         It seems you didn't select a Rival ID. <br /><br />
         Don't worry! Here you can pick your own Rival ID
       </p>
+      
       <LoggedInRegisterID userID={user.id} userEmail={user.email} setUserShareCode={setUserShareCode} setRivalID={setRivalID} />
     </div>
       : ""}

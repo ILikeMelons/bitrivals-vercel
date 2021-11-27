@@ -65,7 +65,7 @@ export const submitWalletAddress =  async(id, walletAddress) => {
       method: "POST",
     });
     const result =await response.json();
-    console.log(result);
+    //console.log(result);
     if(result.statusText == 'OK'){
       resolve('Address added successfully!')
     }
@@ -77,7 +77,7 @@ export const submitWalletAddress =  async(id, walletAddress) => {
 export const registerUserComplete =  async(id, rivalID, email, password='', inviteCode='') => {
   // call default function in pages/api/register
   // send the email and password from form submission event to that endpoint
-  console.log(inviteCode)
+  //console.log(inviteCode)
   return new Promise(async function(resolve, reject){
     const response = await fetch("/api/auth/registerRivalId", {
       body: JSON.stringify({

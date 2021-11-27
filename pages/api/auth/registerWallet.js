@@ -8,6 +8,6 @@ export default async function registerWallet(req, res){
         res.status(401).json({ error:'unauthorized' });
     }
     const result = await insertWalletAtID(address, id);
-    console.log(result)
+    //console.log(result)
     return res.status(result.status).json({statusText : result.statusText});	
 }

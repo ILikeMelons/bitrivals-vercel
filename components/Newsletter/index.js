@@ -9,15 +9,6 @@ const Newsletter = () => {
 	const Success = 'Success!'
 
     const [title, setTitle] = useState(Subscribe)
-    const submitData = async(value) => {
-        console.log(value);
-       /* const response = SubscribeEmail(value).then(res => {
-            return res;
-        }).catch(e=>{
-            return e;
-        })
-        console.log(response);*/
-    }
 
     const textTitle = () => {
         return `DON'T MISS OUT ON THE LATEST`

@@ -12,9 +12,10 @@ export const getCode = async(id) => {
         }).then(response => {
             return response;
         }).catch((e)=> {return e})
-        //console.log("allo");
+     
         const result = await res;
         const jsonFormat = await result.json()
+      
         return jsonFormat[0];
 }
 
@@ -33,7 +34,6 @@ export const loadProfile = async(id, shareCode) => {
     method: "POST",
   });
     const result = await loadProfile.json();
-    console.log(result.rivalID)
     resolve({rivalID : result.rivalID, count : result.referalCount});
 
   });

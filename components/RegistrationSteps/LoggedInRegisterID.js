@@ -12,13 +12,11 @@ const SignupSchema = Yup.object().shape({
 });
 
 const RegisterID = ({userID, userEmail, setUserShareCode, setRivalID }) => {
-    const hide = () => {
-        let x = document.getElementById('rivalIDForm');
-        x.style.display = "hidden";
-    }
+  const [errorMsg, setErrorMsg] = useState('');
+ 
     return (
         <Formik id='rivalIDForm'
-                onSubmit={(values)=> { registerUserComplete(userID ,values.RivalID, userEmail).then(res=>{setUserShareCode(res.invitation); setRivalID(res.rivalID);}).catch(e=>{console.log(e)})}} 
+                onSubmit={(values)=> { registerUserComplete(userID ,values.RivalID, userEmail).then(res=>{setUserShareCode(res.invitation); setRivalID(res.rivalID);}).catch(e=>{setErrorMsg(e)})}} 
                 validationSchema={SignupSchema} 
                 initialValues={{
 					RivalID: "",
@@ -34,6 +32,7 @@ const RegisterID = ({userID, userEmail, setUserShareCode, setRivalID }) => {
                     : "relative inputWrapper  mb-4"
                 }
               >
+                <p className='text-pink'>{errorMsg} </p>
                 <label htmlFor="RivalID" className="text-white">
                   RivalID
                 </label>
