@@ -117,7 +117,7 @@ useEffect(async()=>{
         <label className="pt-10 text-gray-300 text-14px">Your share URL</label>
         <input
           type="text"
-          value={"Bitrivals.gg/?invite=" + userShareCode}
+          value={"www.bitrivals.gg/?invite=" + userShareCode}
           id="inviteInput"
           className={"text-center  text-pink bg-transparent cursor-pointer py-2"}
           onClick={(e) => {

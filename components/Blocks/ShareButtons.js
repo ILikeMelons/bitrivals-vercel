@@ -9,7 +9,7 @@ const messengerBtn = document.querySelector(".messenger-btn");
 const mailBtn = document.querySelector(".mail-btn");
         const img = bitrivals.src;
 
-        const postUrl = encodeURI("Bitrivals.gg/?invite="+code)
+        const postUrl = encodeURI("www.bitrivals.gg/?invite="+code)
         const postTitle = encodeURI("Join BitRivals today! Register your rivalID to claim 10$ of $RIVAL tokens.")
         const postImg = encodeURI(img);
         

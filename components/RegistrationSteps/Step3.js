@@ -14,7 +14,7 @@ const Step3 = ({SubmitData, code}) => {
         </p>
         <div className='flex flex-col'>
         <label className='text-white pr-2'>Your share URL</label>
-       <input type="text" value={"Bitrivals.gg/?invite=" + code} id='inviteInput'  className={'text-center  text-pink bg-transparent cursor-pointer ' + styles.inactiveCaret} onClick={(e)=> {CopyToClipBoard(e)}}/>
+       <input type="text" value={"www.bitrivals.gg/?invite=" + code} id='inviteInput'  className={'text-center  text-pink bg-transparent cursor-pointer ' + styles.inactiveCaret} onClick={(e)=> {CopyToClipBoard(e)}}/>
         </div>
        
         <p className="text-14px max-w-sm font-medium pt-10 text-white">

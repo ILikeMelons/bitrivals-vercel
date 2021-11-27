@@ -17,11 +17,6 @@ const SignupSchema = Yup.object().shape({
 
 
 const Step1 = ({ submitData, inviteCode, errorMsg }) => {
-
-	const [prevValue, setprevValue] = useState('');
-	const [errorMessage, setErrorMessage] = useState('')
-
-
 	return (
 		<div className="w-full mt-4 md:mt-0">
 	
