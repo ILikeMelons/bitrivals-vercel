@@ -106,7 +106,7 @@ useEffect(async()=>{
       <div className={rivalID == undefined ? "hidden" : "block"}>
       <p className="text-white text-14px pb-5">
         It seems you didn&apos;t select a Rival ID. <br /><br />
-        Don't worry! Here you can pick your own Rival ID
+        Don&apos;t worry! Here you can pick your own Rival ID
       </p>
       
       <LoggedInRegisterID userID={user.id} userEmail={user.email} setUserShareCode={setUserShareCode} setRivalID={setRivalID} />
