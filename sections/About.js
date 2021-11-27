@@ -147,7 +147,7 @@ const About = ({variant, user}) => {
               </div>
             </div>
           </div>
-          : ''//</section><Register user={user} /> 
+          : <Register user={user} />
         }
           
         </Container>
