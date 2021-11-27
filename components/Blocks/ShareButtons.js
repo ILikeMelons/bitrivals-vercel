@@ -37,7 +37,7 @@ const ShareButtons = ({shareCode}) => {
           <i className='fab fa-whatsapp text-pink'></i>
         </a>
         <a href='#' className='border-2 border-pink border-opacity-10 px-8 py-2 rouded-xl messenger-btn' target="_blank">
-          <i className='fab fa-facebook-messenger text-pink'></i>
+          <i className='fab fa-facebook text-pink'></i>
         </a>
         <a href='#' className='border-2 border-pink border-opacity-10 px-8 py-2 rouded-xl mail-btn' target="_blank">
           <i className='fas fa-envelope text-pink h-auto'></i>
