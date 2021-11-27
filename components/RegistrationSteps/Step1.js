@@ -21,14 +21,7 @@ const Step1 = ({ submitData, inviteCode, errorMsg }) => {
 	const [prevValue, setprevValue] = useState('');
 	const [errorMessage, setErrorMessage] = useState('')
 
-	const validateRival = async(value) => {
-	
-		if(value !== prevValue){
-			setprevValue(value);
-			setErrorMessage(await ValidateRivalID(value))
-		}
-		return errorMessage;
-	}
+
 	return (
 		<div className="w-full mt-4 md:mt-0">
 	
@@ -218,35 +211,6 @@ const InvitationHeader = () => {
 		</>
 	)
 }
-
-
-const ValidateRivalID = async(value) => {
-	//console.log(value);
-	if(value.length > 2 ){
-		const response = fetch("/api/auth/validateRivalId", {
-			body: JSON.stringify({
-				rivalID: value
-			}),
-			headers: {
-				"Content-type":"application/json"
-			},
-			method: "POST"
-		}).then((res)=> { 
-			
-			return res;
-		})
-		.catch((e)=>{return e})
-		const code = await response;
-		const json = await code.json();
-
-		
-		if(json.data > 0){
-			return "This Rival ID is unavailable!"
-		}
-	}
-	
-	
-};
 
 
 export default Step1;

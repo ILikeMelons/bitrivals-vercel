@@ -3,7 +3,6 @@ import {Formik, Form, Field, useFormik } from "formik";
 import router, {useRouter} from 'next/router'
 import {Step1, Step2, Step3, LoggedInRegisterID} from './RegistrationSteps'
 import {submitWalletAddress, registerUserComplete } from './../requests/registration'
-import {insertInvitation, saveInvitation, callIncrement} from './../requests/invitation'
 import { getCode, loadProfile } from '../requests/profile';
 import  getInvitationCode  from '../hooks/getInvitationCode';
 import ShareButtons from '../components/Blocks/ShareButtons'
