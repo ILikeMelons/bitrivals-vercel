@@ -37,8 +37,12 @@ export const getReservationCode = () => {
 }
 
 const getCurrentUrl = () => {
-  const invitation = window.location.search;
+  const invitation = location.href;
   const getCode = invitation.split('=');
  
   return getCode;
+}
+
+function isIOSDevice(){
+  return !!navigator.userAgentData.platform && /iPad|iPhone|iPod/.test(navigator.userAgentData.platform);
 }
