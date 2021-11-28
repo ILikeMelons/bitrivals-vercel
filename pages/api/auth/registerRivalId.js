@@ -1,5 +1,5 @@
 import {checkRivalID, insertRivalID, insertUserShareCode, getUserRivalID, verifyEmailInUse, signUpUser, saveInviteCodeUsed, incrementInvitationUse} from '../../../backend/Supabase'
-import { registerUser } from '../../backend/MailerLite'
+import { registerUser } from '../../../backend/MailerLite'
 
 export default async function registerRivalID(req, res) {
     // destructure the e-mail and password received in the request body.
