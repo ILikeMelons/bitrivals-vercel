@@ -3,10 +3,10 @@ import { bitrivals} from '../../public'
 import Script from 'next/script'
 
 function initShare(code){
-    const twitterBtn = document.querySelector(".twitter-btn");
-const whatsappBtn = document.querySelector(".whatsapp-btn");
-const messengerBtn = document.querySelector(".messenger-btn");
-const mailBtn = document.querySelector(".mail-btn");
+        const twitterBtn = document.querySelector(".twitter-btn");
+        const whatsappBtn = document.querySelector(".whatsapp-btn");
+        const messengerBtn = document.querySelector(".messenger-btn");
+        const mailBtn = document.querySelector(".mail-btn");
         const img = bitrivals.src;
 
         const postUrl = encodeURI("www.bitrivals.gg/?invite="+code)

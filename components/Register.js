@@ -3,12 +3,15 @@ import {Formik, Form, Field, useFormik } from "formik";
 import router, {useRouter} from 'next/router'
 import {Step1, Step2, Step3, LoggedInRegisterID} from './RegistrationSteps'
 import {submitWalletAddress, registerUserComplete } from './../requests/registration'
+
+import Script from 'next/script'
 import { getCode, loadProfile } from '../requests/profile';
 import  getInvitationCode  from '../hooks/getInvitationCode';
 import ShareButtons from '../components/Blocks/ShareButtons'
 import {useEffect, useState} from 'react'
 import * as Yup from 'yup';
 import { P } from '@storybook/components';
+import { copy } from '../utils/clipboard';
 
 
 const Register = ({user}) => {
@@ -58,6 +61,7 @@ const Register = ({user}) => {
 
   return (
     <>
+   
    {
      user == null  ? 
      <div className="relative z-10 w-full lg:p-12 pt-10 registerMask lg:w-1/2 bg-black-50">
@@ -77,10 +81,7 @@ const Profile = ({user}) => {
   const [rivalID, setRivalID] = useState('');
   const [referalUsed, setReferralUsed] = useState(0)
   const [loading, setloading] = useState(false);
-  
-  const CopyToClipBoard = (e) => {
-    navigator.clipboard.writeText(e.target.value)
-}
+   
 
 
 
@@ -113,16 +114,14 @@ useEffect(async()=>{
     </div>
       : ""}
       
-      <div className="flex flex-col">
+      <div className="flex flex-col"  onClick={() => { copy("referralURL")}}>
         <label className="pt-10 text-gray-300 text-14px">Your share URL</label>
         <input
+          id="referralURL"
           type="text"
           value={"www.bitrivals.gg/?invite=" + userShareCode}
-          id="inviteInput"
-          className={"text-center  text-pink bg-transparent cursor-pointer py-2"}
-          onClick={(e) => {
-            CopyToClipBoard(e);
-          }}
+          className={"text-center  text-pink bg-transparent cursor-pointer py-2 select-none"}
+
         />
       </div>
       <div className="flex flex-row justify-around pt-10">
