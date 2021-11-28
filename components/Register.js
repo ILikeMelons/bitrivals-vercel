@@ -120,7 +120,7 @@ useEffect(async()=>{
           id="referralURL"
           type="text"
           value={"www.bitrivals.gg/?invite=" + userShareCode}
-          className={"text-center  text-pink bg-transparent cursor-pointer py-2 select-none"}
+          className={"text-center  text-pink bg-transparent cursor-pointer py-2 hidden-cursor"}
 
         />
       </div>

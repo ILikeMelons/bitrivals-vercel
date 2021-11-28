@@ -20,7 +20,7 @@ const Step3 = ({SubmitData, code}) => {
         type="text" 
         value={"www.bitrivals.gg/?invite=" + code} 
         id='inviteInput'  
-        className={' text-center  text-pink bg-transparent cursor-pointer ' + styles.inactiveCaret} 
+        className={' text-center  text-pink bg-transparent cursor-pointer hidden-cursor'} 
        
         />
         </div>
