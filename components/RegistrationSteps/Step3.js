@@ -19,7 +19,7 @@ const Step3 = ({SubmitData, code}) => {
         id='copyboard' 
         type="text" 
         value={"www.bitrivals.gg/?invite=" + code} 
-        id='inviteInput'  
+      
         className={' text-center  text-pink bg-transparent cursor-pointer hidden-cursor'} 
        
         />
