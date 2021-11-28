@@ -2,6 +2,7 @@ import supabase from '../utils/supabaseClient'
 import {Formik, Form, Field, useFormik } from "formik";
 import router, {useRouter} from 'next/router'
 import {Step1, Step2, Step3, LoggedInRegisterID} from './RegistrationSteps'
+import ReferralCode from './Blocks/ReferralCode';
 import {submitWalletAddress, registerUserComplete } from './../requests/registration'
 
 import Script from 'next/script'
@@ -114,19 +115,7 @@ useEffect(async()=>{
     </div>
       : ""}
       
-      <div className="flex flex-col"  onClick={() => { copy("referralURL")}}>
-        <label className="pt-10 text-gray-300 text-14px">Your share URL</label>
-        <input
-          id="referralURL"
-          type="text"
-          value={"www.bitrivals.gg/?invite=" + userShareCode}
-          className={"text-center  text-pink bg-transparent cursor-pointer py-2 hidden-cursor"}
-
-        />
-      </div>
-      <div className="flex flex-row justify-around pt-10">
-        <ShareButtons shareCode={userShareCode} />
-      </div>
+      <ReferralCode userShareCode={userShareCode}/>
       <div className='flex flex-row flex-1 pt-5'>
           <div className='flex flex-col border-r-2 border-gray-800 pr-10'>
               <p className='text-white pb-3'>Sign ups used</p>
