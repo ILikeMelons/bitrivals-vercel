@@ -1,5 +1,5 @@
 import {checkRivalID, insertRivalID, insertUserShareCode, getUserRivalID, verifyEmailInUse, signUpUser, saveInviteCodeUsed, incrementInvitationUse} from '../../../backend/Supabase'
-
+import { registerUser } from '../../backend/MailerLite'
 
 export default async function registerRivalID(req, res) {
     // destructure the e-mail and password received in the request body.
@@ -42,7 +42,7 @@ export default async function registerRivalID(req, res) {
          let {d, e} = await insertRivalID(userID, rivalID, email);
          let {data, err} = await getUserRivalID(userID);
          let code = await insertUserShareCode(userID);
-        
+         registerUser(email)
         return res.status(200).json({validID : validID, validEmail : validEmail, invitation : code, rivalID : data[0].rivalid, user : newUser, errorMsg : ''})
    }
 
