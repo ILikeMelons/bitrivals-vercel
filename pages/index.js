@@ -18,6 +18,7 @@ export default function Home() {
   })
   return (
       <main className='relative overflow-hidden bg-black-50'>
+         
         <Hero user={user}/>
         <What />
         <Zones />

@@ -1,0 +1,19 @@
+.preloader_left {
+  animation: preloader_left 1.6s cubic-bezier(0.11, 1.9, 0.56, 1) infinite;
+}
+
+.preloader_right {
+  animation: preloader_right 1.6s cubic-bezier(0.11, 1.9, 0.56, 1) infinite;
+}
+
+@keyframes preloader_left {
+  0% {opacity: 0; top: 60px; left:-18px;}
+  40% {top: 11px; left: 4px;}
+  100% {top: 11px; left: 4px;}
+}
+
+@keyframes preloader_right {
+  0% {opacity: 0; top: -55px; left:56px;}
+  40% {top: 16px; left: 34px;}
+  100% {top: 16px; left: 34px;}
+}
