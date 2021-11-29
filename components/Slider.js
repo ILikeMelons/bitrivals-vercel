@@ -23,7 +23,7 @@ const Block = (props) => {
                         return (
                             <div key={'GAME' + index} className="pr-3 tile" style={{ opacity: 1 }}>
                                 <div className="relative py-48 overflow-hidden" >
-                                <div className="absolute inset-0 bg-cover tile_bg" style={{backgroundImage: `url('images/tiles/${game.split(' ').join('')}-bg.png')`}}></div>
+                                <div className="absolute inset-0 bg-cover tile_bg" style={{backgroundImage: `url('images/tiles/${game.split(' ').join('')}-bg.avif')`}}></div>
                                 <h4 className="absolute left-0 right-0 w-1/2 pt-24 m-auto leading-4 text-center capitalize transition-all duration-200 opacity-0 top-1/2 text-14px text-yellow" >{game}</h4>
                                 <div className="absolute inset-0 tile_overlay"></div>
                                 <img className="absolute tile_trim -right-0 -top-40 w-80 max-w-none" src={union_red_small.src} /> 
