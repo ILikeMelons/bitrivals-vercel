@@ -2,6 +2,7 @@ import React from 'react'
 import 'tailwindcss/tailwind.css'
 import '../styles/globals.css'
 import Head from 'next/head'
+import Script from 'next/script'
 import { useRouter } from 'next/router'
 import * as gtag from './../lib/gtag'
 import { hotjar } from 'react-hotjar'
@@ -27,23 +28,8 @@ function MyApp({ Component, pageProps }) {
     hotjar.initialize(2706531, 6)
   }, [])
   return (
-    <React.Fragment>
+    <>
       <Head>
-      {/*Global site tag (gtag.js) - Google Analytics --> */} 
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-5MJ3ME1WMT"></script>
-      <script
-            dangerouslySetInnerHTML={{
-              __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config',  'G-5MJ3ME1WMT', {
-              page_path: window.location.pathname,
-            });
-          `,
-            }}
-          />
-
         <title>Bit Rivals | Crypto powered eSports tournaments</title>
         <meta name="Bit Rivals" content="The ultimate crypto powered platform for gamers" />
         <meta property="og:title" content="Bit Rivals" />
@@ -54,16 +40,31 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.png" />
 
       </Head>
-
+      <Script 
+      strategy='lazyOnload'
+      src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+      />
+      <Script 
+      strategy='lazyOnload'
+      >
+        {
+           `
+           window.dataLayer = window.dataLayer || [];
+           function gtag(){dataLayer.push(arguments);}
+           gtag('js', new Date());
+           gtag('config',  '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
+             page_path: window.location.pathname,
+           });
+         `
+        }
+      </Script>
       {!loading ? (
-        <React.Fragment>
           <Component {...pageProps} />
-        </React.Fragment>
       ) : (
         <Preloader />
       )}
-     
-    </React.Fragment>
+   
+    </>
   )
 }
 
