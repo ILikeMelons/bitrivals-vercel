@@ -5,11 +5,11 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import * as gtag from './../lib/gtag'
 import { hotjar } from 'react-hotjar'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Preloader from '../components/Preloader'
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const handleRouteChange = url => {
