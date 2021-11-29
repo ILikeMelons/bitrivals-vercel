@@ -109,7 +109,7 @@ const Zones = () => {
 					<div className="relative z-20 md:-top-56 ">
 						<div className="relative flex flex-wrap w-full md:pr-12 rotator_content">
 							<div className="w-full md:w-1/2">
-								<img src="images/zones/rival_player_hub.png" />
+								<img src="images/zones/rival_player_hub.avif" />
 							</div>
 							<div className="w-full text-white md:pl-10 md:w-1/2">
 								<h2 className="mt-5 mb-4 uppercase font-morgan text-38px md:mt-0 md:text-80px">Rival<br/> Player Hub</h2>
@@ -161,7 +161,7 @@ const Zones = () => {
 						</div>
 						<div className="relative flex flex-wrap w-full md:pr-12 rotator_content">
 							<div className="w-full md:w-1/2">
-								<img src="images/zones/rival_arena.png" />
+								<img src="images/zones/rival_arena.avif" />
 							</div>
 							<div className="w-full text-white md:pl-10 md:w-1/2">
 								<h2 className="mt-5 mb-4 uppercase font-morgan text-38px md:mt-0 md:text-80px">Rival<br/> Arena</h2>
@@ -175,7 +175,7 @@ const Zones = () => {
 						</div>
 						<div className="relative flex flex-wrap w-full md:pr-12 rotator_content">
 							<div className="w-full md:w-1/2">
-								<img src="images/zones/rival_rewards.png" />
+								<img src="images/zones/rival_rewards.avif" />
 							</div>
 							<div className="w-full text-white md:pl-10 md:w-1/2">
 								<h2 className="mt-5 mb-4 uppercase font-morgan text-38px md:mt-0 md:text-80px">Rival<br/> Rewards</h2>
@@ -227,7 +227,7 @@ const Zones = () => {
 						</div>
 						<div className="relative flex flex-wrap w-full md:pr-12 rotator_content">
 							<div className="w-full md:w-1/2">
-								<img src="images/zones/rival_loot.png" />
+								<img src="images/zones/rival_loot.avif" />
 							</div>
 							<div className="w-full text-white md:pl-10 md:w-1/2">
 								<h2 className="mt-5 mb-4 uppercase font-morgan text-38px md:mt-0 md:text-80px">Rival<br/> Loot</h2>
@@ -285,7 +285,7 @@ const Zones = () => {
 						</div>
 						<div className="relative flex flex-wrap w-full md:pr-12 rotator_content">
 							<div className="w-full md:w-1/2">
-								<img src="images/zones/rival_swap.png" />
+								<img src="images/zones/rival_swap.avif" />
 							</div>
 							<div className="w-full text-white md:pl-10 md:w-1/2 text-14px">
 								
