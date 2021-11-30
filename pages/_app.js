@@ -8,17 +8,25 @@ import * as gtag from './../lib/gtag'
 import { hotjar } from 'react-hotjar'
 import { useEffect, useState } from 'react'
 import Preloader from '../components/Preloader'
+
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
-
+  const [loading, setLoading] = useState(true);
+  const [hidden, setHidden] = useState('');
+  const toggleHidden = (loading) => {
+  if(!loading){
+    setTimeout(()=>{setHidden(" hidden ")}, 1200)
+  }
+  }
   useEffect(() => {
     const handleRouteChange = url => {
       gtag.pageview(url)
     }
-    setLoading(true);
-    setTimeout(() => setLoading(false), 3000);
+    
+    setTimeout(() => {setLoading(false); toggleHidden(false)}, 1200);
     router.events.on('routeChangeComplete', handleRouteChange)
+
+
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
@@ -59,11 +67,18 @@ function MyApp({ Component, pageProps }) {
          `
         }
       </Script>
-      {!loading ? (
-          <Component {...pageProps} />
-      ) : (
-        <Preloader />
-      )}
+      
+          <div className={loading ? "invisible" : "visible"}>
+            <Component {...pageProps}  /> 
+          </div>
+      
+          <Preloader className={"transition-opacity duration-1000 ease-out  " + (loading ? " opacity-100 " : " opacity-0 ") + hidden}/> 
+          
+          
+     
+         
+          
+     
    
     </>
   )
