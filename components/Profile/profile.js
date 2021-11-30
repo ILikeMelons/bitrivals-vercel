@@ -18,7 +18,7 @@ const Profile = ({user, shareCode, rivalIdentifier, referralUsed}) => {
         <p className="text-white text-14px pb-5">
           The Rival ID is your gateway to the Bit Rivals ecosystem.
         </p>
-        { (rivalID.length == 0 || rivalID == undefined)   ? 
+        { (rivalID == undefined || rivalID.length == 0)   ? 
         <div className={rivalID == undefined ? "hidden" : "block"}>
         <p className="text-white text-14px pb-5">
           It seems you didn&apos;t select a Rival ID. <br /><br />
