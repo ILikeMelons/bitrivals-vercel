@@ -34,7 +34,7 @@ export const loadProfile = async(id, shareCode) => {
     method: "POST",
   });
     const result = await loadProfile.json();
-    resolve({rivalID : result.rivalID, count : result.referalCount});
+    resolve({rivalID : result.rivalID, count : result.referalCount, wallet : result.wallet});
 
   });
 

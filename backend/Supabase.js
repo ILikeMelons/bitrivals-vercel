@@ -111,6 +111,12 @@ export const insertRivalID = async(userID, rivalID, userEmail) => {
     return response;
   }
 
+  export const getUserWalletAdress = async(id) => {
+      const response = await supabase.from('profiles')
+      .select('wallet_adress').eq('id', id).then((res) =>{return res}).catch((e)=>{return e});
+      return response;
+  }
+
 
   export const signInUser = async(email, password) => {
       const response = await supabase.auth.signIn({

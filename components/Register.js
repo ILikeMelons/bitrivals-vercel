@@ -2,7 +2,7 @@ import supabase from '../utils/supabaseClient'
 import {Formik, Form, Field, useFormik } from "formik";
 import router, {useRouter} from 'next/router'
 import {Step1, Step2, Step3, LoggedInRegisterID} from './RegistrationSteps'
-import Profile from './Profile/profile';
+import Profile from './Profile/Profile';
 import ReferralCode from './Blocks/ReferralCode';
 import {submitWalletAddress, registerUserComplete } from './../requests/registration'
 
