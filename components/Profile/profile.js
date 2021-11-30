@@ -4,11 +4,20 @@ import { LoggedInRegisterID } from '../RegistrationSteps';
 import { getCode, loadProfile } from '../../requests/profile';
 import styles from './style.module.css'
 
-const Profile = ({user, shareCode, rivalIdentifier, referralUsed}) => {
-    const [userShareCode, setUserShareCode ] = useState(shareCode);
-    const [rivalID, setRivalID] = useState(rivalIdentifier);
-    const [referalUsed, setReferralUsed] = useState(referralUsed)
+const Profile = ({user}) => {
+    const [userShareCode, setUserShareCode ] = useState('');
+    const [rivalID, setRivalID] = useState('');
+    const [referalUsed, setReferralUsed] = useState(0)
   
+
+    useEffect(()=>{
+        if(user){
+            getCode(user.id)
+            .then((res)=>{if(res.invite_id !== undefined){setUserShareCode(res.invite_id)}})
+            .then(()=>{loadProfile(user.id, userShareCode).then((res)=>{console.log(res); setReferralUsed(res.count < 10 ? res.count : 10); setRivalID(res.rivalID) })
+            .catch(e=>{console.log(e)})}).catch((e)=>{console.log(e)})
+          }
+    })
   
     return (
       <div className="relative z-10 w-full lg:p-12 pt-10 registerMask lg:w-1/2 bg-black-50">
@@ -44,24 +53,6 @@ const Profile = ({user, shareCode, rivalIdentifier, referralUsed}) => {
     );
   }
 
-  export async function getStaticProps() {
-      let shareCode = '';
-      let rivalID = '';    
-      let referralUsed = 0;
-      if(user){
-        getCode(user.id)
-        .then((res)=>{if(res.invite_id !== undefined){shareCode = res.invite_id}})
-        .then(()=>{loadProfile(user.id, userShareCode).then((res)=>{rivalID = res.rivalID; res.count < 10 ? referralUsed = res.count : referralUsed = 10})
-        .catch(e=>{console.log(e)})}).catch((e)=>{console.log(e)})
-      }
-
-      return {
-          props:{
-              shareCode : shareCode,
-              rivalIdentifier : rivalID,
-              referralUsed : referralUsed
-          }
-      }
-  }
+  
 
  export default Profile;
