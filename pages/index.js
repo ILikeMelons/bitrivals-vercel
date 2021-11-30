@@ -15,7 +15,7 @@ export default function Home() {
   const [user, setUser] = useState(null);
   useEffect(()=>{
     setUser(supabase.auth.user());
-  })
+  }, [])
   return (
       <main className='relative overflow-hidden bg-black-50'>
          

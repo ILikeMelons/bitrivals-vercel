@@ -19,7 +19,7 @@ const Profile = ({user}) => {
           }
 
     
-    }, [rivalID])
+    }, [])
   
     return (
       <div className="relative z-10 w-full lg:p-12 pt-10 registerMask lg:w-1/2 bg-black-50">
