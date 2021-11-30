@@ -27,21 +27,21 @@ const ShareButtons = ({shareCode}) => {
   })
      
   return (
-    <>
+    <div className='grid grid-cols-1 sm:grid-cols-4 w-full gap-y-2 sm:gap-x-2'>
       <Script src="https://kit.fontawesome.com/e7a9cfc5e0.js" crossorigin="anonymous" />
-      <a href='#' className='px-8 py-2 border-2 border-pink border-opacity-10 rouded-xl twitter-btn' target="_blank">
+      <a href='#' className='flex justify-center  py-4 border-2 border-pink border-opacity-10 rouded-xl twitter-btn' target="_blank">
         <i className='fab fa-twitter text-pink'></i>
       </a>
-      <a href='#' className='px-8 py-2 border-2 border-pink border-opacity-10 rouded-xl whatsapp-btn' target="_blank">
+      <a href='#' className='flex justify-center  py-4 border-2 border-pink border-opacity-10 rouded-xl whatsapp-btn' target="_blank">
         <i className='fab fa-whatsapp text-pink'></i>
       </a>
-      <a href='#' className='px-8 py-2 border-2 border-pink border-opacity-10 rouded-xl messenger-btn' target="_blank">
+      <a href='#' className='flex justify-center  py-4 border-2 border-pink border-opacity-10 rouded-xl messenger-btn' target="_blank">
         <i className='fab fa-facebook text-pink'></i>
       </a>
-      <a href='#' className='px-8 py-2 border-2 border-pink border-opacity-10 rouded-xl mail-btn' target="_blank">
+      <a href='#' className='flex justify-center  py-4  border-2 border-pink border-opacity-10 rouded-xl mail-btn' target="_blank">
         <i className='h-auto fas fa-envelope text-pink'></i>
       </a>
-    </>
+    </div>
   )
 }
 
