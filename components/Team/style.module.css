@@ -2,13 +2,15 @@
 .image,
 .draven,
 .peach,
-.corvo {
+.corvo,
+.nada {
     position: relative;
 }
 
 .image span,
 .draven span,
 .peach span,
+.nada span,
 .corvo span {
     position: relative;
 }
@@ -17,7 +19,8 @@
     .image::after,
     .draven:after,
     .peach:after,
-    .corvo:after {
+    .corvo:after,
+    .nada:after {
         display: block;
         height: 800px;
         width: 137px;

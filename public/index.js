@@ -10,6 +10,7 @@ export {default as shepard } from './Team/Shepard.png'
 export {default as draven } from './Team/Draven.png'
 export {default as peach } from './Team/Peach.png'
 export {default as corvo } from './Team/Corvo.png'
+export {default as nada } from './Team/Nada.png'
 export {default as wallet } from './images/icons/wallet.svg'
 export {default as medal } from './images/icons/medal.svg'
 
