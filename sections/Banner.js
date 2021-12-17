@@ -10,9 +10,15 @@ const icons = [
         link: 'https://www.certik.org/projects/bit-rivals'
     },
     {
+        image : coinmarketcap.src,
+        height: '30px',
+        className: 'mt-3',
+        link: 'https://coinmarketcap.com/'
+    },
+    {
         
         image : coingecko.src,
-        height : '56px',
+        height : '36px',
         className: 'mt-3',
         link: 'https://www.coingecko.com/en'
     },
@@ -21,14 +27,7 @@ const icons = [
         height : '30px',
         className: 'mt-3',
         link: 'https://nomics.com/'
-    },
-    {
-        image : coinmarketcap.src,
-        height: '30px',
-        className: 'mt-3',
-        link: 'https://coinmarketcap.com/'
     }
-
 ]
 const Banner = () => {
     return (
@@ -39,7 +38,7 @@ const Banner = () => {
                     return (
                         <Link href={icon.link}  key={'bannerIcon' + index}>
                             <a target="_blank" rel="noreferrer" >
-                                <img src={ icon.image } style={{ height:icon.height }} className={'w-auto h-fill align-baseline ' + icon.className}/>
+                                <img src={ icon.image } style={{ height:icon.height }} className={'w-auto h-fill align-baseline m-auto ' + icon.className}/>
                             </a>
                         </Link>
                     )
