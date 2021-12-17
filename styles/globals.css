@@ -33,24 +33,23 @@
     nav a::before {
         display: block;
         content: '';
-        bottom: -2px;
+        bottom: -3px;
         position: absolute;
         width: 0%;
-        height: 12px;
-        left: -5px;
+        height: 3px;
+        left: 0px;
         background-color: #fb385b;
         transition: width 300ms;
         mix-blend-mode: lighten;
-        transform: skew(10deg, 0deg);
     }  
 }
 
 nav a:hover::before {
-    width: 115%;
+    width: 100%;
 }
 
 nav a.active::before {
-    width: 115%;
+    width: 100%;
 }
 
 .heroMask {
