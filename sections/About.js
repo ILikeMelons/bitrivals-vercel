@@ -123,9 +123,14 @@ const About = ({variant, user}) => {
                   powered by the non-deflationary $RIVAL token.
                 </p>
                 <p>Compete, be rewarded, be social, buy loot, customise your profile, squad up and more.</p>
-                <div className='flex flex-row pt-6 space-x-5'>
+                <div className='flex flex-row pt-6 space-x-5 pb-5'>
                   <Button text="Read the litepaper" iconAfter={true} blank={true} href="/files/Bit Rivals Litepaper.pdf" />
                   <Button text="Rival token" iconAfter={true} href="/token" />
+                </div>
+                <div className='relative h-10 mb-5'>
+                    <div className='absolute bg-pink text-right pr-5 right-8 sm:right-96 md:right-20  py-5 bg-opacity-20' style={{width:'1000px'}}>
+                        <p className='text-22px sm:text-30px font-morgan text-pink'>PREsALE STARTS JANUARY 21ST</p>
+                    </div>
                 </div>
                 <p className='pb-5 pt-14 md:pt-11'>Stay in the loop</p>
                 <SocialLinks />
