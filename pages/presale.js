@@ -11,7 +11,7 @@ import Footer from '../sections/Footer'
 import Tokenomics from '../sections/Tokenomics/tokenomics'
 import Allocations from '../sections/Allocations/allocations'
 
-export default function presale() {
+const Presale= () =>  {
     const [user, setUser] = useState(null);
     useEffect(()=>{
       setUser(supabase.auth.user());
@@ -32,3 +32,5 @@ export default function presale() {
    
     )
   }
+
+  export default Presale;
