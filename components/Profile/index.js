@@ -9,17 +9,18 @@ const Profile = ({user}) => {
     const [rivalID, setRivalID] = useState('');
     const [referalUsed, setReferralUsed] = useState(0)
     const [wallet, setWallet] = useState('')
-
+    const [isLoading, setIsLoading] = useState(true);
+    
     useEffect(()=>{
+      console.log(user);
         if(user){
             getCode(user.id)
             .then((res)=>{if(res.invite_id !== undefined){setUserShareCode(res.invite_id)}})
-            .then(()=>{loadProfile(user.id, userShareCode).then((res)=>{console.log(res); setReferralUsed(res.count < 10 ? res.count : 10); setRivalID(res.rivalID); setWallet(res.wallet) })
+            .then(()=>{loadProfile(user.id, userShareCode).then((res)=>{setReferralUsed(res.count < 10 ? res.count : 10); setRivalID(res.rivalID); setWallet(res.wallet) })
             .catch(e=>{console.log(e)})}).catch((e)=>{console.log(e)})
           }
-
-    
-    }, [])
+          setIsLoading(false)
+    }, [referalUsed])
   
     return (
       <div className="relative z-10 w-full lg:p-12 pt-10 registerMask lg:w-1/2 bg-black-50">
@@ -29,7 +30,7 @@ const Profile = ({user}) => {
         <p className="text-white text-14px pb-5">
           The Rival ID is your gateway to the Bit Rivals ecosystem.
         </p>
-        { (rivalID == undefined || rivalID.length == 0)   ? 
+        { (rivalID == undefined || rivalID.length == 0) && !isLoading ? 
         <div className={rivalID == undefined ? "hidden" : "block"}>
         <p className="text-white text-14px pb-5">
           It seems you didn&apos;t select a Rival ID. <br /><br />

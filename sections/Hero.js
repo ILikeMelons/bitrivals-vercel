@@ -1,8 +1,10 @@
 import Navbar from "../components/Navbar"
 import About from "./About"
 import { union_white, union_red} from '../public/absolutes'
-
-const Hero = ({user, variant}) => {
+import { RequireAuth, useUser } from '../hooks/authUser'
+const Hero = ({variant}) => {
+    RequireAuth();
+    const { user } = useUser();
     return (
         <div className={`relative overflow-hidden ${variant}`}>
             <div className="transform scale-50 md:scale-100">

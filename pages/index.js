@@ -1,6 +1,4 @@
-
-import { useState, useEffect } from 'react'
-import { supabase } from '../utils/supabaseClient'
+import { UserContextProvider } from '../hooks/authUser'
 import Hero from '../sections/Hero'
 import What from '../sections/What'
 import Why from '../sections/Why'
@@ -12,23 +10,19 @@ import Tokenomics from '../sections/Tokenomics/tokenomics'
 import Allocations from '../sections/Allocations/allocations'
 
 export default function Home() {
-  const [user, setUser] = useState(null);
-  useEffect(()=>{
-    setUser(supabase.auth.user());
-  }, [])
   return (
-      <main className='relative overflow-hidden bg-black-50'>
-         
-        <Hero user={user}/>
-        <What />
-        <Zones />
-        <Tokenomics />
-        <Allocations />
-        <Why />
-        <Roadmap />
-        <Team />
-        <Footer />
-      </main>
- 
+    <main className='relative overflow-hidden bg-black-50'>
+    <UserContextProvider>
+         <Hero />
+         <What />
+         <Zones />
+         <Tokenomics />
+         <Allocations />
+         <Why />
+         <Roadmap />
+         <Team />
+         <Footer />
+    </UserContextProvider>
+    </main>
   )
 }

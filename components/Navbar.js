@@ -1,13 +1,13 @@
-import { supabase } from '../utils/supabaseClient'
 import { useRouter} from 'next/router'
 import Container from '../components/Container'
 import RedTri from '../public/images/icons/red_tri.svg'
 import Image from 'next/dist/client/image'
 import Link from 'next/link'
 import {Link as ScrollLink} from 'react-scroll'
-
+import { SignOut, useUser } from '../hooks/authUser'
 import { useState } from 'react'
 import { useEffect } from 'react'
+
 
 const navabarItems = [
     {
@@ -48,11 +48,8 @@ const navabarItems = [
 const Navbar = ({user}) => {
     const  router  = useRouter()
     const logOutUser = async() => {
-        const {error} = await supabase.auth.signOut();
-
-        if(!error){
-            router.push('/');
-        }
+        await SignOut();
+        router.push('/');  
     }
   
     const [isScrollValueMoreThanHeaderHeight, setIsScrollValueMoreThanHeaderHeight] = useState(false);

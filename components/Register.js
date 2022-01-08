@@ -63,9 +63,8 @@ const Register = ({user}) => {
 
   return (
     <>
-   
    {
-     user == null  ? 
+     !user  ? 
      <div className="relative z-10 w-full lg:p-12 pt-10 registerMask lg:w-1/2 bg-black-50">
      {registrationStep == 1 && <Step1 submitData={SubmitFirstStep} errorMsg={errorMsg} inviteCode={inviteCode} />}
      {registrationStep == 2 && <Step2 submitData={SubmitSecondStep} errorMsg={errorMsg} rivalID={currentUser.user_metadata.rivalID} successMsg={successMsg}/>}
