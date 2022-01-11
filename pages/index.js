@@ -8,11 +8,12 @@ import Team from '../sections/Squad'
 import Footer from '../sections/Footer'
 import Tokenomics from '../sections/Tokenomics/tokenomics'
 import Allocations from '../sections/Allocations/allocations'
+import Layout from '../components/Layout'
 
 export default function Home() {
   return (
-    <main className='relative overflow-hidden bg-black-50'>
-    <UserContextProvider>
+    <Layout>
+      <UserContextProvider>
          <Hero />
          <What />
          <Zones />
@@ -22,7 +23,7 @@ export default function Home() {
          <Roadmap />
          <Team />
          <Footer />
-    </UserContextProvider>
-    </main>
+      </UserContextProvider>
+    </Layout>
   )
 }
