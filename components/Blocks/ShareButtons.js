@@ -28,7 +28,6 @@ const ShareButtons = ({shareCode}) => {
      
   return (
     <div className='grid grid-cols-1 sm:grid-cols-4 w-full gap-y-2 sm:gap-x-2'>
-      <Script src="https://kit.fontawesome.com/e7a9cfc5e0.js" crossorigin="anonymous" />
       <a href='#' className='flex justify-center  py-4 border-2 border-pink border-opacity-10 rouded-xl twitter-btn' target="_blank">
         <i className='fab fa-twitter text-pink'></i>
       </a>

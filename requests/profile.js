@@ -1,3 +1,4 @@
+import { wallet } from "../public";
 
 
 export const getCode = async(id) => {
@@ -17,6 +18,25 @@ export const getCode = async(id) => {
         const jsonFormat = await result.json()
       
         return jsonFormat[0];
+}
+
+export const updateWallet = async(id, wallet) => {
+  return new Promise(async function(resolve, reject){
+    const updateWallet = await fetch("/api/profile/updateWallet",{
+      body: JSON.stringify({
+        id: id,
+        wallet : wallet
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+      const result = await updateWallet.json();
+      
+      resolve();
+  
+  });
 }
 
 

@@ -52,6 +52,7 @@ function MyApp({ Component, pageProps }) {
       strategy='lazyOnload'
       src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
       />
+      <Script src="https://kit.fontawesome.com/e7a9cfc5e0.js" crossOrigin="anonymous" />
       <Script 
       id='datalayerScript'
       strategy='lazyOnload'
