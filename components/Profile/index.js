@@ -68,7 +68,7 @@ const Profile = ({user}) => {
             <p className='underline'>Your Wallet address</p>
            <div className='flex flex-col sm:flex-row'>
              <div className='w-full'>
-                <input type='text' className='italic text-opacity-75 w-full bg-black-50 w-full'  value={wallet} onChange={(e)=> {setWallet(e.target.value)}}/>
+                <input type='text' className='italic text-opacity-75 w-full bg-black-100 py-1 px-1 rounded-lg w-full border-white border-1' value={wallet} onChange={(e)=> {setWallet(e.target.value)}}/>
            <span className='mt-1 mb-1 text-pink text-14px'>{errorMsg}</span>
              </div>
            
