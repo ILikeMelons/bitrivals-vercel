@@ -1,7 +1,7 @@
 import { defaultConfig } from "next/dist/server/config-shared"
 import Image from 'next/image'
 import Link from 'next/link'
-import { discord, github, telegram, twitter, instagram, reddit } from '../public/socials'
+import { discord, github, telegram, twitter, instagram, reddit, medium } from '../public/socials'
 
 const links = [
     {
@@ -27,6 +27,10 @@ const links = [
     {
         image : github.src,
         link : 'https://www.github.com/bitrivals'
+    },
+    {
+        image : medium.src,
+        link : 'https://bitrivals.medium.com/'
     }
 ]
 
