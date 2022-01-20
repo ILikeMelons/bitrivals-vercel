@@ -127,12 +127,12 @@ const About = ({variant, user}) => {
                   <Button text="Read the litepaper" iconAfter={true} blank={true} href="/files/Bit Rivals Litepaper.pdf" />
                   <Button text="Rival token" iconAfter={true} href="/token" />
                 </div>
-                <div className='relative h-10 mb-5'>
+                {/*<div className='relative h-10 mb-5'>
                     <div className='absolute bg-pink text-right pr-5 right-8 sm:right-96 md:right-20  py-5 bg-opacity-20' style={{width:'1000px'}}>
                         <p className='text-22px sm:text-30px font-morgan text-pink'>PREsALE STARTS JANUARY 21ST</p>
                         <a href='https://gleam.io/PFQx5/bit-rivals-presale-whitelist-spots' target={'_blank'}><p className='pt-1 text-sm'>Click <a className='underline cursor-pointer'>here</a> to join the whitelist</p> </a>
                     </div>
-                </div>
+            </div>*/}
                 <p className='pb-5 pt-14 md:pt-11'>Stay in the loop</p>
                 <SocialLinks />
               </div>
