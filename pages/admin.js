@@ -31,7 +31,7 @@ const AdminLogin = ({login, setText}) => {
           <h1  className='text-white text-2xl pl-2 font-MorganPoster'>Admin</h1>
         <div className='flex flex-col'>
         <input type="password" className='rounded-lg px-2 py-1 text-center' onChange={(e)=>{setText(e.target.value)}}/>
-        <button className='text-white bg-pink rounded-lg mt-2 py-1' onClick={()=>login()}><i class="fa fa-sign-in" aria-hidden="true"></i> </button>
+        <button className='text-white bg-pink rounded-lg mt-2 py-1' onClick={()=>login()}><i className="fa fa-sign-in" aria-hidden="true"></i> </button>
         </div>
           </div>
           
