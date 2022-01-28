@@ -145,3 +145,13 @@ export const countShareTimes = async(shareCode) => {
     //console.log(response);
     return response;
 }
+
+export const getAllUsers = async() => {
+    const response = await supabase.from('profiles').select();
+    return response;
+}
+
+export const disableUserAcount = async(id, disabled) => {
+    const response = await supabase.from('profiles').update({disabled : disabled}).match({id : id});
+    return response;
+}

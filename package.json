@@ -10,6 +10,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@material-ui/icons": "^4.11.2",
     "@storybook/addon-docs": "^6.3.12",
     "@supabase/supabase-js": "^1.25.2",
     "@supabase/ui": "^0.35.0",
@@ -21,6 +22,7 @@
     "next-auth": "^3.29.0",
     "randomstring": "^1.2.1",
     "react": "^17.0.2",
+    "react-data-table-component": "^7.4.7",
     "react-dom": "^17.0.2",
     "react-hotjar": "^4.0.0",
     "react-in-viewport": "^1.0.0-alpha.20",
