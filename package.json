@@ -2,7 +2,7 @@
   "name": "bitrise-nextjs",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -20,6 +20,11 @@
     "mailerlite-api-v2-node": "^1.2.0",
     "next": "12.0.2",
     "next-auth": "^3.29.0",
+    "next-connect": "^0.11.0",
+    "passport": "^0.5.2",
+    "passport-bnet": "^2.0.0",
+    "passport-oauth2": "^1.6.1",
+    "passport-steam": "^1.0.17",
     "randomstring": "^1.2.1",
     "react": "^17.0.2",
     "react-data-table-component": "^7.4.7",
@@ -27,6 +32,7 @@
     "react-hotjar": "^4.0.0",
     "react-in-viewport": "^1.0.0-alpha.20",
     "react-scroll": "^1.8.4",
+    "valve-steam-web-api": "^1.2.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {

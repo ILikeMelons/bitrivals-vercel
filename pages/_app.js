@@ -8,7 +8,7 @@ import * as gtag from './../lib/gtag'
 import { hotjar } from 'react-hotjar'
 import { useEffect, useState } from 'react'
 import Preloader from '../components/Preloader'
-
+import { UserContextProvider } from '../hooks/authUser'
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
@@ -68,11 +68,11 @@ function MyApp({ Component, pageProps }) {
          `
         }
       </Script>
-      
+      <UserContextProvider>
           <div className={loading ? "invisible" : "visible"}>
             <Component {...pageProps}  /> 
           </div>
-      
+      </UserContextProvider>
           <Preloader className={"transition-opacity duration-1000 ease-out  " + (loading ? " opacity-100 " : " opacity-0 ") + hidden}/> 
           
           

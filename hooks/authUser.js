@@ -12,7 +12,7 @@ export const RequireAuth = () => {
 
   useEffect(() => {
     if (!user) {
-      //router.push('/auth')
+      //router.push('/')
     }
   }, [user, router])
 }
