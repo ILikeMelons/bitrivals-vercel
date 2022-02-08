@@ -39,8 +39,8 @@ const navabarItems = [
         scroll: true
     },
     {
-        title : 'Merch',
-        link : 'https://merch.bitrivals.gg/',
+        title : 'Whitelist',
+        link : 'https://gleam.io/PFQx5/bit-rivals-presale-whitelist-spots',
         class: 'text-yellow'
     }
 ]
