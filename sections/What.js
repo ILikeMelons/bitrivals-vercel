@@ -5,13 +5,14 @@ import Slider from "../components/Slider";
 import Title from "../components/Blocks/Title";
 import handleViewport from "react-in-viewport";
 
+
 const titleBlock = (props) => {
 	const {inViewport, forwardedRef} = props;
 	const opacity = inViewport ? 0.2 : 0;
 	const position = inViewport ? 0 : 100;
-    return ( <>
-			<Title title={"WHAT IS \nBIT RIVALS?"} description={"Bit Rivals is a tailor-made ecosystem, built for gamers and crypto enthusiasts. Get rewarded for playing your favourite games, compete in tournaments, form your team, connect with new players, mint your own NFTs, earn passive income, and more."} inViewport={inViewport} forwardedRef={forwardedRef} />
-		</>
+    return ( 
+			<Title title={"WHAT IS \nBIT RIVALS?"} description={"Bit Rivals is a platform built for gamers and crypto enthusiasts, bringing together the best parts of play-to-win and play-to-earn games in a single platform with the help of the $RIVAL token. Earn rewards by simply playing your favorite games, competing in tournaments or by diving  into our metaverse by minting your own NFTs and etching your Rival Hero’s name in history. With our platform, the choice is yours!"} litepaper={true} inViewport={inViewport} forwardedRef={forwardedRef} />
+		
         
     )
 }

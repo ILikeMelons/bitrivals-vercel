@@ -12,7 +12,7 @@ const titleBlock = (props) => {
 	const opacity = inViewport ? 0.2 : 0;
 	const position = inViewport ? 0 : 100;
     return ( <>
-			<Title title={"WHY\nBIT RIVALS"} description={"Gaming shouldn't just be fun; it should also be rewarding. Bit Rivals offers a way to generate automatic rewards and passive income for gamers, all through the power of blockchain technology. We believe in fair access to rewards and incentive structures for gamers based on performance. Bit Rivals is a unique blend of Play to Earn and Play to Win that rewards players at the top of their game and ensures no player is left behind."} inViewport={inViewport} forwardedRef={forwardedRef} />
+			<Title title={"WHY\nBIT RIVALS"} description={"Gaming shouldn't just be fun; it should also be rewarding. Bit Rivals offers every player a way to earn rewards and generate passive income, no matter their skill level, all through the power of blockchain technology. We strive to bring a unique blend of Play-to-Earn and Play-to-Win systems to reward players at the top of their game, while making sure that no player is left behind."} inViewport={inViewport} forwardedRef={forwardedRef} />
 		</>
     )
 }

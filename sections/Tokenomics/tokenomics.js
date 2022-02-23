@@ -13,7 +13,7 @@ const titleBlock = (props) => {
 	const opacity = inViewport ? 0.2 : 0;
 	const position = inViewport ? 0 : 100;
     return ( <>
-			<Title title={"Tokenomics"} description={"The Bit Rivals platform is powered by our original $RIVAL token, designed to power the ecosystem with true utility and provide systems for automatic rewards, hosted on the public Binance Smart Chain blockchain."} inViewport={inViewport} forwardedRef={forwardedRef} />
+			<Title title={"Tokenomics"} description={"The Bit Rivals platform is powered by the $RIVAL token, hosted on the public Binance Smart Chain. $RIVAL gives our ecosystem even more utility and makes the rewards you love possible."} inViewport={inViewport} forwardedRef={forwardedRef} />
 		</>
     )
 }

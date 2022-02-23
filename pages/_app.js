@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Bit Rivals | Crypto powered eSports tournaments</title>
+        <title>Bit Rivals | Play games, earn crypto, win rewards</title>
         <meta name="Bit Rivals" content="The ultimate crypto powered platform for gamers" />
         <meta property="og:title" content="Bit Rivals" />
         <meta property="og:url" content="https://www.bitrivals.gg" />

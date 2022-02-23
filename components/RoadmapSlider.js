@@ -17,9 +17,10 @@ const phases = {
             'Token creation',
             'Official socials creation',
             'Referral program',
+            'Giveaways',
             'Presale ads',
             'Presale',
-            'Launch on PancakeSwap'
+            'Public launch on PancakeSwap'
         ]
     },
     phase2: {
@@ -32,7 +33,7 @@ const phases = {
             'Digital ad campaign',
             'Influencer marketing',
             'Giveaways',
-            'Merch store available',
+            'Official merch store available',
             'Social media growth',
             'Rival Swap launch',
             'Staking/LP Farming available',
@@ -54,6 +55,7 @@ const phases = {
             'Rival Loot design & beta build',
             'Rival Loot closed beta',
             'Official design/art competition',
+            'Featured artist program',
             'Rival Loot launch',
 
         ]
@@ -70,9 +72,9 @@ const phases = {
             'Wallet/swap app integration',
             'Twitch tipping integration',
             'Fiat on-ramp integration',
-            'Partner with games studios',
+            'Partnership with games studios',
             'Funding indie games',
-            'eSports team sponsorship',
+            'We sponsor a pro eSports team',
         ]
     }
 }

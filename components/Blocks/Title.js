@@ -1,3 +1,5 @@
+import Button from '../Button'
+
 const Title = (props) => {
 	const { inViewport, forwardedRef } = props;
 	const opacity = inViewport ? 1 : 0;
@@ -19,7 +21,12 @@ const Title = (props) => {
 					<h2>
 					    {props.description}
 					</h2>
+					{props.litepaper ? 
+					<div className='flex flex-wrap pt-2'>
+					<Button text="Read the litepaper" iconAfter={true} blank={true} href="/files/Bit Rivals Litepaper.pdf" />
+					</div> : '' }
 				</div>
+				
 			</div>
 		</div>
 	);

@@ -13,7 +13,7 @@ const titleBlock = (props) => {
 	const opacity = inViewport ? 0.2 : 0;
 	const position = inViewport ? 0 : 100;
     return ( <>
-			<Title title={"ALLOCATIONS"} description={"Created with the help of experienced blockchain engineers and economists, the $RIVAL token will be allocated in a manner that is fair to the token holder and ensures longevity of the project. The largest portion of $RIVAL tokens is allocated to presale, open market, and rewards for staking/liquidity farming. The Rival Reserve will also start with 7% of the total supply. The remaining tokens will be used to pay staff, provide funds for marketing and development, fund airdrops, and foster partnerships with institutional investors."} inViewport={inViewport} forwardedRef={forwardedRef} />
+			<Title title={"ALLOCATIONS"} description={"Created with the help of experienced blockchain engineers and economists, the $RIVAL token will be allocated in a manner that is fair to the token holder and ensures longevity of the project."} inViewport={inViewport} forwardedRef={forwardedRef} />
 		</>
     )
 }

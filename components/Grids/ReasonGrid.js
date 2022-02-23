@@ -5,23 +5,23 @@ import Button from '../Button';
 const items = [
     {
         fullrow : true,
-        title : "AUDIT in progress by certik, THE WORLD LEADERS IN CRYPTO SECURITY",
-        text : "The audit assesses the code and underlying structure of the $RIVAL smart contract. It ensures that the smart contract is free of exploits and potential vulnerabilities. This in-depth audit will be completed by a team of blockchain experts at CertiK, one of the world's leading blockchain security providers." 
+        title : "Audited by certik, THE WORLD LEADERS IN CRYPTO SECURITY",
+        text : "The audit assesses the code and underlying structure of the $RIVAL smart contract. It ensures that the smart contract is free of exploits and potential vulnerabilities." ,
+        text2 : "An In-depth audit was completed by a team of blockchain experts at CertiK, one of the world's leading blockchain security providers."
     },
     {
         topIcon : wallet.src,
         fullrow : false,
-        title : 'Zones are Funded by our Rival Reserve wallet',
-        text : 'The 1% fee on every $RIVAL token transaction goes to fund the Rival Reserve Wallet. All of these tokens are redistributed back to gamers through the tournament and Play to Earn systems. None of the tokens gained through the transaction fee will go to the team or development, ensuring the fairest distribution to gamers.',
-        link : '/token'
+        title : 'KYC by Nanuque',
+        text : 'Our team members official government identity documents were verified by the Nanuqe team, including a full interview of the project and an in-depth PEP and sanctions check.',
+        link : 'https://nanuqe.com/bit-rivals/',
+        blank: true
     },
     {
         topIcon: medal.src,
         fullrow : false,
-        title : 'Be rewarded for playing your favourite video games',
-        text : 'In addition to $RIVAL tokens, users on the Bit Rivals platform will have the opportunity to earn Rival points by participating in tournaments or playing public matches of their favorite games through our unique Play to Earn model. Points can be used to level up on the Bit Rivals platform, exchanged for raffle tickets, NFTs, or $RIVAL tokens, and unlock unique achievements and badges.',
-        link : '/our squad',
-        scroll : true
+        title : 'Official LLC',
+        text : 'Bit Rivals LLC is a legally-protected entity in Saint Vincent and the Grenadines (SVG)'
     }
 ]
 
@@ -48,7 +48,7 @@ const Block = (props) => {
             {
                 items.map((item, index) => {
                     return (
-                        <GridItem key={item.title + index} title={item.title} topIcon={item.topIcon} fullrow={item.fullrow} text={item.text} link={item.link}  /> 
+                        <GridItem key={item.title + index} title={item.title} topIcon={item.topIcon} fullrow={item.fullrow} text2={item.text2} text={item.text} space={item.space} blank={item.blank} link={item.link}  /> 
                     );
                 })
             }
@@ -60,7 +60,7 @@ const ViewportBlock = handleViewport(Block);
 
 
 const GridItem = (props) => {
-    const {title, topIcon, fullrow, text, link  } = props;
+    const {title, topIcon, fullrow, text, link, text2, blank  } = props;
     return (
         <div className={'relative w-full text-white ' + (fullrow ? ' md:col-span-2' : '' )}>
             {topIcon !== undefined ?  <div className='w-20 h-20'> <img src={topIcon} /> </div>  : ''}
@@ -69,8 +69,10 @@ const GridItem = (props) => {
             </h1>
             <p className={'pt-5 md:max-w-lg text-14px' + (fullrow ? ' md:pr-20' : '' )}>
                 {text}
+                { text2 ? <><br/><br/></> : "" }
+                {text2}
             </p>
-
+           
             {
                 fullrow ? 
                     <div className='flex flex-row pt-6 space-x-5 grayscale'>
@@ -81,7 +83,7 @@ const GridItem = (props) => {
                         </a>
                     </div> : 
                     <div className='flex flex-row pt-6 space-x-5'>
-                        <Button text="Learn more" iconAfter={true} href={link} />
+                        <Button text="Learn more" iconAfter={true} href={link} blank={blank}/>
                     </div>
             }
         </div>
