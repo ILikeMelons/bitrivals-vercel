@@ -1,4 +1,4 @@
-import Table from '../components/Table';
+//import Table from '../components/Table';
 import {getAllUsers} from '../backend/Supabase' 
 import { useState } from 'react';
 import { login } from '../requests/admin';
