@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }) {
         <meta property="og:image" content="/shareImage.png" />
         <meta property="twitter:image" content="/shareImageTwitter.png" />        
         <link rel="icon" href="/favicon.png" />
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <Script  strategy='lazyOnload' src="https://unpkg.com/axios/dist/axios.min.js"></Script>
 
       </Head>
       <Script 
