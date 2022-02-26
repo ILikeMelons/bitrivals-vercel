@@ -15,7 +15,7 @@ export default function Admin({data}) {
       {!isAdmin ? 
         <AdminLogin login={enter} setText={setText} />
       :
-      <Table data={data} />   
+     {/* <Table data={data} />   */}
       }
      
     </div>

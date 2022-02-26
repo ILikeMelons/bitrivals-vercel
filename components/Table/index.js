@@ -1,6 +1,6 @@
 import DataTable from "react-data-table-component";
-import SortIcon from "@material-ui/icons/ArrowDownward";
-import DeleteIcon from "@material-ui/icons/Delete";
+/* import SortIcon from "@material-ui/icons/ArrowDownward";
+import DeleteIcon from "@material-ui/icons/Delete"; */
 import { useState, useMemo } from "react";
 //import Disabled from "@material-ui/icons/DisabledByDefault"
 const columns = [
@@ -182,7 +182,7 @@ const Table = ({data}) => {
           columns={columns}
           data={filteredItems}
           defaultSortFieldId={1}
-          sortIcon={<SortIcon />}
+          //sortIcon={<SortIcon />}
           pagination
           subHeader
     			subHeaderComponent={subHeaderComponentMemo}
