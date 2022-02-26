@@ -46,9 +46,8 @@ function MyApp({ Component, pageProps }) {
         <meta property="og:image" content="/shareImage.png" />
         <meta property="twitter:image" content="/shareImageTwitter.png" />        
         <link rel="icon" href="/favicon.png" />
-        <Script  strategy='lazyOnload' src="https://unpkg.com/axios/dist/axios.min.js"></Script>
-
       </Head>
+      <Script  strategy='lazyOnload' src="https://unpkg.com/axios/dist/axios.min.js"></Script>
       <Script 
       strategy='lazyOnload'
       src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
