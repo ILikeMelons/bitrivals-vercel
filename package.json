@@ -15,6 +15,7 @@
     "@supabase/supabase-js": "^1.25.2",
     "@supabase/ui": "^0.35.0",
     "@trendyol-js/react-carousel": "^2.0.0",
+    "axios": "^0.26.0",
     "dotenv": "^10.0.0",
     "formik": "^2.2.9",
     "mailerlite-api-v2-node": "^1.2.0",

@@ -46,6 +46,7 @@ function MyApp({ Component, pageProps }) {
         <meta property="og:image" content="/shareImage.png" />
         <meta property="twitter:image" content="/shareImageTwitter.png" />        
         <link rel="icon" href="/favicon.png" />
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
       </Head>
       <Script 
