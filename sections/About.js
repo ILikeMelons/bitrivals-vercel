@@ -97,7 +97,7 @@ const About = ({variant, user}) => {
                  $rival<br/> 
                  token
                </h1>:
-                <h1 className="pb-2 mb-4 font-semibold uppercase md:mb-1 text-56px md:text-68px font-morgan">
+                <h1 className="pb-2 mb-4 font-semibold uppercase md:mb-1 text-42px md:text-68px font-morgan">
                  Be rewarded for<br/> 
                  <h1 className='text-yellow'>PLAYING YOUR</h1>
                  <h1 className='text-yellow'>FAVOURITE GAMES</h1>
