@@ -36,7 +36,7 @@ const About = ({variant, user}) => {
                   height: '35px',
                   background: `url(${cross_solid_yellow.src})`,
                   position: 'absolute',
-                  top: `${200 - (percentage * 110)}px`,
+                  top: `${50 - (percentage * 110)}px`,
                   left: '340px',
                   backgroundSize: 'cover',
                   transform: `rotate(${percentage * 300}deg)`
@@ -97,10 +97,10 @@ const About = ({variant, user}) => {
                  $rival<br/> 
                  token
                </h1>:
-                <h1 className="pb-2 mb-4 font-semibold uppercase md:mb-1 text-56px md:text-80px font-morgan">
-                 PLAY<br/> 
-                 WIN<br/> 
-                 EARN
+                <h1 className="pb-2 mb-4 font-semibold uppercase md:mb-1 text-56px md:text-68px font-morgan">
+                 Be rewarded for<br/> 
+                 <h1 className='text-yellow'>PLAYING YOUR</h1>
+                 <h1 className='text-yellow'>FAVOURITE GAMES</h1>
                </h1>
               }
 
@@ -118,9 +118,8 @@ const About = ({variant, user}) => {
                 </div> : 
                 <div className='text-14px lg:pr-12'>
                 <p className="mb-6">
-                  Bit Rivals is an upcoming eSports tournament hosting and
-                  creation platform with a feature packed gamer ecosystem,
-                  powered by the non-deflationary $RIVAL token.
+                Most casual players will never earn money playing video games. Bit Rivals is a cross-game platform that rewards 
+                gamers of all skill levels for playing their favourite games. <span className='text-yellow'>Play games, earn crypto, win rewards.</span>
                 </p>
                 <p>Compete, be rewarded, be social, buy loot, customise your profile, squad up and more.</p>
                 <div className='flex flex-row pt-6 space-x-5 pb-5'>
