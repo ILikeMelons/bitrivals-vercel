@@ -1,0 +1,8 @@
+.heroMask {
+    width: 1814px;
+    height: 1384px;
+    -webkit-clip-path: polygon(49% -41%, 100% -41%, 28% 100%, 0 100%, 0% 50%);
+    clip-path: polygon(77% -41%, 180% -111%, 28% 90%, 0 90%, 0% 60%);
+    transform: translateX(872px) translateY(-51px);
+    opacity: 1;
+}

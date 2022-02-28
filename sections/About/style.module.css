@@ -1,0 +1,21 @@
+
+
+.yellowtopdiv {
+    display: flex;
+    width: fit-content;
+}
+
+.yellowtopdiv::before {
+    content : '';
+    z-index: -2;
+    display: inline-block;
+    border-style: solid solid hidden hidden;
+    border-width: 3px;
+    border-color: #F9BA3F;
+    margin-left: auto;
+    position: absolute;
+    top: -1%;
+    width: 50px;
+    height: 20px;
+    right: 9.6em;
+}
