@@ -13,7 +13,7 @@ const titleBlock = (props) => {
 	const opacity = inViewport ? 0.2 : 0;
 	const position = inViewport ? 0 : 100;
     return ( <>
-			<Title title={"Tokenomics"} description={"The Bit Rivals platform is powered by the $RIVAL token, hosted on the public Binance Smart Chain. $RIVAL gives our ecosystem even more utility and makes the rewards you love possible."} inViewport={inViewport} forwardedRef={forwardedRef} />
+			<Title title={"Tokenomics"} description={"The first-of-its-kind $RIVAL token is what powers the Bit Rivals platform, giving our ecosystem true utility and providing systems for automatic rewards."} inViewport={inViewport} forwardedRef={forwardedRef} />
 		</>
     )
 }
@@ -41,15 +41,15 @@ const Tokenomics = (props) => {
 						</div>
 						<h3 className="mt-2 md:mt-8 text-38px text-pink font-morgan">1,000,000,000</h3>
 						<h4 className="mt-2 text-white text-14px">Total Supply</h4>
-						<p className="mt-4 leading-5 text-black-150 text-12px">No more having to pull out a calculator every time you want to see how many pennies your millions of tokens are worth. $RIVAL will have a reasonable total supply that ensures your tokens carry value.</p>
+						<p className="mt-4 leading-5 text-black-150 text-12px">With a reasonable total supply of one billion $RIVAL, we're making sure that your token will carry lasting value.</p>
 					</div>
 					<div className="md:text-center">
 					<div className="relative z-10 md:m-auto md:px-8 bg-black-50 w-max">
 							<Image src={'/images/icons/tax.svg'} width={`50vw`} height={`50vw`} className=" bg-black-50" />
 						</div>
-						<h3 className="mt-2 md:mt-8 text-38px text-pink font-morgan">1%</h3>
-						<h4 className="mt-2 text-white text-14px">Tax on transactions</h4>
-						<p className="mt-4 leading-5 text-black-150 text-12px">This fee is collected into a Rival Reserve wallet which funds the tournament and rewards system. None of the fees go to the development team - 100% of all transaction fees are distributed back to gamers through the Bit Rivals system.</p>
+						<h3 className="mt-2 md:mt-8 text-38px text-pink font-morgan">Powered by</h3>
+						<h4 className="mt-2 text-white text-14px">the Binance Smart Chain</h4>
+						<p className="mt-4 leading-5 text-black-150 text-12px">We're putting the blockchain to work for you, using the latest developments in smart contracts to bring you the most value for your investment.</p>
 					</div>
 					<div className="md:text-center">
 					<div className="relative z-10 md:m-auto md:px-8 bg-black-50 w-max">
@@ -57,7 +57,7 @@ const Tokenomics = (props) => {
 						</div>
 						<h3 className="mt-2 md:mt-8 text-38px text-pink font-morgan">Passive Income</h3>
 						<h4 className="mt-2 text-white text-14px">Staking and LP Rewards</h4>
-						<p className="mt-4 leading-5 text-black-150 text-12px">A substantial portion of $RIVAL token has been delegated for staking and liquidity farming rewards. This will bring stability to the token economy and provide a means of passive income for $RIVAL holders.</p>
+						<p className="mt-4 leading-5 text-black-150 text-12px">A substantial portion of $RIVAL token has been delegated for staking and liquidity farming rewards bringing stability to the token economy.</p>
 					</div>
 				</div>
 				<div className="mt-12 mb-4 md:mb-10 md:mt-36 breaker"></div>
