@@ -1,21 +1,23 @@
 
 
 .yellowtopdiv {
-    display: flex;
-    width: fit-content;
+    width: inherit;
+   
 }
 
 .yellowtopdiv::before {
     content : '';
     z-index: -2;
-    display: inline-block;
+    display: inline;
     border-style: solid solid hidden hidden;
     border-width: 3px;
     border-color: #F9BA3F;
-    margin-left: auto;
+    padding-left: 0%;
+    padding-right: 0%;
     position: absolute;
     top: -1%;
     width: 50px;
     height: 20px;
-    right: 9.6em;
+    right: 0px;
 }
+

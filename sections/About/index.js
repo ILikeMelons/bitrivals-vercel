@@ -99,9 +99,12 @@ const About = ({variant, user}) => {
                  token
                </h1>:
                 <>
-                <div className='block'>
-                <div className={'bg-yellow text-black-50 flex flex-wrap w-min p-2 font-morgan text-30px ml-2 '  }>PLAY.WIN.EARN </div>
+               
+                <div className={'relative bg-yellow text-black-50 w-min p-2 font-morgan text-30px ml-2 '} >
+                  PLAY.WIN.EARN
+                  <div className='absolute border-t-2 border-r-2' style={{width:"75px", height:"20px", borderColor:"#F9BA3F", top:"-7px", right:"-8px"}} />
                 </div>
+                
                  <h1 className="pb-2 mb-4 font-semibold uppercase mt-4 md:mb-1 text-42px md:text-68px font-morgan">
                  Be rewarded for<br/> 
                  <h1 className='text-yellow'>PLAYING YOUR</h1>
