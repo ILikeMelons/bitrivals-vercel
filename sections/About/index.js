@@ -100,7 +100,7 @@ const About = ({variant, user}) => {
                </h1>:
                 <>
                
-                <div className={'relative bg-yellow text-black-50 w-min p-2 font-morgan text-30px ml-2 '} >
+                <div className={'relative bg-yellow text-black-50 w-min p-2 font-morgan text-30px  '} >
                   PLAY.WIN.EARN
                   <div className='absolute border-t-2 border-r-2' style={{width:"75px", height:"20px", borderColor:"#F9BA3F", top:"-7px", right:"-8px"}} />
                 </div>
