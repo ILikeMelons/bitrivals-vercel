@@ -45,7 +45,7 @@ const navabarItems = [
     }
 ]
 
-const Navbar = ({user}) => {
+const Navbar = ({user, hideLinks=false}) => {
     const  router  = useRouter()
     const logOutUser = async() => {
         await SignOut();
@@ -102,12 +102,12 @@ const Navbar = ({user}) => {
                         </div>
                         <div className="fixed top-0 flex flex-col w-full h-screen js-nav left-full lg:justify-between lg:items-center lg:flex-row lg:h-auto lg:static bg-black-50 lg:bg-transparent">
                         <nav className='flex flex-col pt-20 pl-6 font-medium lg:pl-0 lg:flex-row lg:h-auto lg:pt-0'>
-                        {
+                        { !hideLinks ?
                             navabarItems.map((item, index) => {
                                 return (
                                     item.scroll ? <ScrollLink onSetActive={handleSetActive} className="relative inline-block mt-4 mr-6 text-white cursor-pointer lg:mt-0 text-32px lg:text-14px" key={item.title + index} href={item.link} to={item.title.toLowerCase()} spy={true} smooth={true}>{item.title}</ScrollLink> : <Link key={item.title + index} href={item.link}><a rel="noreferrer" className={'relative inline-block mt-4 mr-6 text-white cursor-pointer lg:mt-0 text-32px lg:text-14px ' + item.class}>{item.title}</a></Link>
                                 )
-                            })
+                            }) : ''
                         }
                         </nav>
                     
