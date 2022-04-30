@@ -12,7 +12,7 @@ import  getInvitationCode  from '../hooks/getInvitationCode';
 import ShareButtons from '../components/Blocks/ShareButtons'
 import {useEffect, useState} from 'react'
 import * as Yup from 'yup';
-import { P } from '@storybook/components';
+
 import { copy } from '../utils/clipboard';
 
 

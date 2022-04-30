@@ -1,9 +1,9 @@
-import Container from '../../components/Container'
-import Register from '../../components/Register'
-import Banner from '../../sections/Banner'
+import Container from '../../components/Container';
+import Register from '../../components/Register';
+import Banner from '../../sections/Banner';
 import { Parallax } from 'react-parallax';
 import SocialLinks from '../../components/SocialLinks';
-import Button from '../../components/Button'
+import Button from '../../components/Button';
 import { triangle_solid_white, cross_solid_yellow, triangle_outline_pink, circle_solid_white, square_outline_yellow } from '../../public/shapes'
 import style from './style.module.css'
 
@@ -137,6 +137,10 @@ const About = ({variant, user}) => {
                  <a className='flex flex-row' href='/files/Bit Rivals Litepaper.pdf' target={"_blank"}> Read the litepaper <ArrowImage /> </a>
                    
                 </div>
+                <div>
+              
+                </div>
+                
                 {/*<div className='relative h-10 mb-5'>
                  <Button text="Read the litepaper" iconAfter={true} blank={true} href="/files/Bit Rivals Litepaper.pdf" />
                     <div className='absolute bg-pink text-right pr-5 right-8 sm:right-96 md:right-20  py-5 bg-opacity-20' style={{width:'1000px'}}>
