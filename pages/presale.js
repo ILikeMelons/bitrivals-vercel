@@ -13,7 +13,7 @@ import {
 import { useWeb3React } from "@web3-react/core";
 import Layout from '../components/Layout'
 import Navbar from "../components/Navbar"
-import Web3connect from '../components/Modals/web3connect';
+import Web3connect from '../components/Modals/Web3connect';
 import useLocalStorage from "../hooks/useLocalStorage";
 import { networkParams } from "../networks";
 import { connectors } from "../connectors";
