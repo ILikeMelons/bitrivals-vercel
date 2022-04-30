@@ -17,13 +17,16 @@ module.exports = {
     extend: {
       colors: {
         black: {
-          50: '#121825',
+          50: '#141C2D',
           100: '#1E2534',
-          150: '#9DA3B0'
+          150: '#9DA3B0',
+          200: '#26334E',
+          250: '#1B253B'
         },
         'pink' : '#FB385B',
         'blue': '#1EBAFA',
-        'yellow': '#F9BA3F'
+        'yellow': '#F9BA3F',
+        'newblue' : '#141C2D'
       },
       
       fontSize: {

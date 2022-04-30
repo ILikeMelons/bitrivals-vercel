@@ -507,3 +507,49 @@ input#swap:checked + div + div > div.rotator_content:nth-of-type(5) {
 .hidden-cursor {
     caret-color: transparent;
 }
+
+input[id="terms"]:checked {
+    border: 2px solid #f9ba3f;
+    background:#ffba3457;
+}
+input[id="terms"]:checked:after {
+    display: block;
+    content: '';
+    width: 16px;
+    height: 12px;
+    background-size: cover !important;
+    left: 2px;
+    top: -3px;
+    position: relative;
+    background-repeat: no-repeat !important;
+    background: url(/images/icons/tickSmall.svg);
+}
+
+.bg_sector {
+    height: 380px;
+    width: 34%;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  
+  .bg_sector[quadrant=top-left] {
+    left: 0;
+    top: 0;
+    background-position: top left;
+  }
+  .bg_sector[quadrant=bottom-left] {
+    left: 0;
+    bottom: 0;
+    background-position: bottom left;
+  }
+  .bg_sector[quadrant=top-right] {
+    right: 0;
+    top: 0;
+    background-position: top right;
+  }
+  .bg_sector[quadrant=bottom-right] {
+    right: 0;
+    bottom: 0;
+    background-position: bottom right;
+  }

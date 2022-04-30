@@ -7,7 +7,6 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Web3ReactProvider } from "@web3-react/core";
 import { useRouter } from 'next/router'
 import * as gtag from './../lib/gtag'
-import { hotjar } from 'react-hotjar'
 import { useEffect, useState } from 'react'
 import { ethers } from "ethers";
 import Preloader from '../components/Preloader'
@@ -43,9 +42,6 @@ function MyApp({ Component, pageProps }) {
     }
   }, [router.events])
 
-  useEffect(() => {
-    hotjar.initialize(2706531, 6)
-  }, [])
   return (
     <>
       <Head>
