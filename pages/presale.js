@@ -84,13 +84,13 @@ const Presale = () => {
       
     return(
         <Layout>
-            <Container className="relative h-screen font-semibold text-white inner">
-              <div className="relative flex items-center w-1/2">
+            <Container className="relative h-screen font-semibold text-white inner  ">
+              <div className="relative md:flex items-center md:w-full sm:hidden ">
                 <Image className="w-full" src="/images/character.png" layout="fill" alt="" />
               </div>
-              <div className="flex items-center w-1/2">
+              <div className="flex items-center w-full">
                 <div className="">
-                  <div className="w-2/3">
+                  <div className="md:w-2/3">
                     <h1 className="mb-3 text-5xl uppercase font-morgan">Private Sale Contribution</h1>
                     <p className="mb-12 text-yellow">Buy $RIVAL with BUSD</p>
                   </div>
@@ -138,7 +138,7 @@ const Presale = () => {
                   <div className="flex items-center gap-2 mt-8 text-sm">
                     <input type="checkbox" />I have read and agree to the terms and conditions
                   </div>
-                  <button className="p-12 bg-yellow text-black-50">Reserve your tokens</button>
+                  <button className="p-6 bg-yellow text-black-50 mt-5 rounded-md">Reserve your tokens</button>
                 </div>
               </div>
             </Container>
