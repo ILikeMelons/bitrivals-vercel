@@ -20,7 +20,8 @@ import { connectors } from "../connectors";
 import { Parallax } from 'react-parallax';
 import { getUserBalanceBNB, getUserBalanceBUSD } from "../utils/web3";
 import bitrivals from '../public/bitrivals_icon.svg' 
-
+import Container from "../components/Container";
+import Image from "next/dist/client/image";
 
 const Presale = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -83,28 +84,79 @@ const Presale = () => {
       
     return(
         <Layout>
-            {/* <div className="pt-10 ml-32 flex overflow-y-hidden">
-             <Image src={bitrivals.src} width={150} height={24} alt='logo'/>
+            <Container className="relative h-screen font-semibold text-white inner">
+              <div className="relative flex items-center w-1/2">
+                <Image className="w-full" src="/images/character.png" layout="fill" alt="" />
+              </div>
+              <div className="flex items-center w-1/2">
+                <div className="">
+                  <div className="w-2/3">
+                    <h1 className="mb-3 text-5xl uppercase font-morgan">Private Sale Contribution</h1>
+                    <p className="mb-12 text-yellow">Buy $RIVAL with BUSD</p>
+                  </div>
+                  <div>
+                    <input type="number" className="p-2 transition-all duration-300 border-2 rounded-md outline-none bg-black-50 border-black-100 focus:border-yellow"></input>
+                  </div>
+                  <div className="flex flex-col gap-2 pb-8 text-sm border-b-2 border-black-100">
+                    <div className="flex justify-between w-full">
+                      <span className="text-black-150">Outgoing token</span>
+                      <span>0 BUSD</span>
+                    </div>
+                    <div className="flex justify-between w-full ">
+                      <span className="text-black-150">Incoming token</span>
+                      <span>0 RIVAL</span>
+                    </div>
+                    <div className="flex justify-between w-full ">
+                      <span className="text-black-150">Swap ratio</span>
+                      <span className="text-yellow">1 BUSD = 100 RIVAL</span>
+                    </div>
+                  </div>
+                  <p className="my-8 text-sm">By purchasing these tokens you agree to the vesting schedule as follows</p>
+                  <ul className="flex flex-col gap-1 text-sm">
+                    <li className="flex items-center gap-1">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.25 8.74998C13.75 11.25 11.865 13.604 9.22 14.13C7.92999 14.3869 6.59181 14.2303 5.396 13.6824C4.2002 13.1345 3.20772 12.2233 2.5599 11.0786C1.91207 9.93383 1.64192 8.61387 1.78791 7.30666C1.9339 5.99944 2.48859 4.77161 3.373 3.79798C5.187 1.79998 8.25 1.24998 10.75 2.24998" stroke="#F9BA3F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M5.75 7.75L8.25 10.25L14.25 3.75" stroke="#F9BA3F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      9 months total vesting
+                    </li>
+                    <li className="flex items-center gap-1">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.25 8.74998C13.75 11.25 11.865 13.604 9.22 14.13C7.92999 14.3869 6.59181 14.2303 5.396 13.6824C4.2002 13.1345 3.20772 12.2233 2.5599 11.0786C1.91207 9.93383 1.64192 8.61387 1.78791 7.30666C1.9339 5.99944 2.48859 4.77161 3.373 3.79798C5.187 1.79998 8.25 1.24998 10.75 2.24998" stroke="#F9BA3F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M5.75 7.75L8.25 10.25L14.25 3.75" stroke="#F9BA3F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      10% TGE unlock
+                    </li>
+                    <li className="flex items-center gap-1">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.25 8.74998C13.75 11.25 11.865 13.604 9.22 14.13C7.92999 14.3869 6.59181 14.2303 5.396 13.6824C4.2002 13.1345 3.20772 12.2233 2.5599 11.0786C1.91207 9.93383 1.64192 8.61387 1.78791 7.30666C1.9339 5.99944 2.48859 4.77161 3.373 3.79798C5.187 1.79998 8.25 1.24998 10.75 2.24998" stroke="#F9BA3F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M5.75 7.75L8.25 10.25L14.25 3.75" stroke="#F9BA3F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      10% monthly unlock
+                    </li>
+                  </ul>
+                  <div className="flex items-center gap-2 mt-8 text-sm">
+                    <input type="checkbox" />I have read and agree to the terms and conditions
+                  </div>
+                  <button className="p-12 bg-yellow text-black-50">Reserve your tokens</button>
+                </div>
+              </div>
+            </Container>
+            <div className='hidden'>            
+                <div className='flex justify-center p-2'>
 
-            </div> */}
-            <div className='w-full relative h-screen bg-brand flex justify-center items-center'>
-            
-                <div className='p-2 flex justify-center'>
-                  
-                {console.log(account)}
-                    {/*<h1 className='text-pink font-morgan text-30px'>PRESALE COMING SOON!</h1> */}
                     {!active
                     ? 
                   
-                    <button onClick={onOpen} className='text-white border-white border-2 px-4 py-1 rounded-lg hover:text-pink hover:border-pink'>
+                    <button onClick={onOpen} className='px-4 py-1 text-white border-2 border-white rounded-lg hover:text-pink hover:border-pink'>
                         Connect Wallet
                     </button> : 
                       <div>
-                       <button onClick={disconnect} className='text-white border-white border-2 px-4 py-1 rounded-lg hover:text-pink hover:border-pink'>
+                       <button onClick={disconnect} className='px-4 py-1 text-white border-2 border-white rounded-lg hover:text-pink hover:border-pink'>
                     Disconnect
                 </button>
-                <p className="text-white pt-2">Your address : {account && account}</p>
-                <p className="text-white pt-2">Your balance : {balance.toFixed(2)} BUSD</p>
+                <p className="pt-2 text-white">Your address : {account && account}</p>
+                <p className="pt-2 text-white">Your balance : {balance.toFixed(2)} BUSD</p>
                 <p className="text-pink">{wrongChainMessage}</p>
                       </div>
                    
