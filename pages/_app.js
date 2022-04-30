@@ -3,12 +3,16 @@ import 'tailwindcss/tailwind.css'
 import '../styles/globals.css'
 import Head from 'next/head'
 import Script from 'next/script'
+import { ChakraProvider } from "@chakra-ui/react";
+import { Web3ReactProvider } from "@web3-react/core";
 import { useRouter } from 'next/router'
 import * as gtag from './../lib/gtag'
 import { hotjar } from 'react-hotjar'
 import { useEffect, useState } from 'react'
+import { ethers } from "ethers";
 import Preloader from '../components/Preloader'
 import { UserContextProvider } from '../hooks/authUser'
+
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
@@ -18,6 +22,13 @@ function MyApp({ Component, pageProps }) {
     setTimeout(()=>{setHidden(" hidden ")}, 1200)
   }
   }
+
+  const getLibrary = (provider) => {
+    const library = new ethers.providers.Web3Provider(provider);
+    library.pollingInterval = 8000; // frequency provider is polling
+    return library;
+  };
+
   useEffect(() => {
     const handleRouteChange = url => {
       gtag.pageview(url)
@@ -68,6 +79,8 @@ function MyApp({ Component, pageProps }) {
          `
         }
       </Script>
+      <ChakraProvider>
+      <Web3ReactProvider getLibrary={getLibrary}>
       <UserContextProvider>
           <div className={loading ? "invisible" : "visible"}>
             <Component {...pageProps}  /> 
@@ -75,6 +88,11 @@ function MyApp({ Component, pageProps }) {
       </UserContextProvider>
           <Preloader className={"transition-opacity duration-1000 ease-out  " + (loading ? " opacity-100 " : " opacity-0 ") + hidden}/> 
           
+      </Web3ReactProvider>
+
+      </ChakraProvider>
+      
+     
           
      
          
