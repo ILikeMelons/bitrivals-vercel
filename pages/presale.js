@@ -18,13 +18,17 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import { networkParams } from "../networks";
 import { connectors } from "../connectors";
 import { Parallax } from 'react-parallax';
-import { getUserBalanceBNB, getUserBalanceBUSD } from "../utils/web3";
+import { getUserBalanceBNB, getUserBalanceBUSD, sendBUSDtoWallet } from "../utils/web3";
 import bitrivals from '../public/bitrivals_icon.svg' 
 import Container from "../components/Container";
 import Image from "next/dist/client/image";
+import Web3 from "web3";
+import { BigNumber } from "ethers";
 
 const Presale = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [loading, setLoading] = useState(false);
+    const toggleLoading = () => setLoading(value => !value);
     
     const {
       library,
@@ -69,9 +73,11 @@ const Presale = () => {
     const contributed = 0; // Get from our sheet
     let maxContribution = 8000; // Get from whitelist sheet
     const whitelisted = true; // Get from whitelist sheet
+    const devWallet = '0x976DAab65D56Bd171dB845F1850724BBEc6C288B'
+    const busdAddress = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
 
     // --------------
-    
+
     maxContribution = maxContribution - contributed;
     const userBUSDmax = balance.toFixed(2);
     const maxBUSD = userBUSDmax > maxContribution ? maxContribution : userBUSDmax;
@@ -96,8 +102,32 @@ const Presale = () => {
       setTokens({...tokens, rival: (maxBUSD * (1 / tokenPrice).toFixed(2)), busd: maxBUSD});
     }
 
+    const web3 = new Web3(Web3.givenProvider);
+    const ABI = [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"assetProtectionRole","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"paused","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"betaDelegateWhitelister","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"proposedOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"EIP712_DOMAIN_HASH","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"supplyController","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"currentOwner","type":"address"},{"indexed":true,"name":"proposedOwner","type":"address"}],"name":"OwnershipTransferProposed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"oldProposedOwner","type":"address"}],"name":"OwnershipTransferDisregarded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"oldOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[],"name":"Pause","type":"event"},{"anonymous":false,"inputs":[],"name":"Unpause","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"addr","type":"address"}],"name":"AddressFrozen","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"addr","type":"address"}],"name":"AddressUnfrozen","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"addr","type":"address"}],"name":"FrozenAddressWiped","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"oldAssetProtectionRole","type":"address"},{"indexed":true,"name":"newAssetProtectionRole","type":"address"}],"name":"AssetProtectionRoleSet","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"SupplyIncreased","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"SupplyDecreased","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"oldSupplyController","type":"address"},{"indexed":true,"name":"newSupplyController","type":"address"}],"name":"SupplyControllerSet","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"},{"indexed":false,"name":"seq","type":"uint256"},{"indexed":false,"name":"fee","type":"uint256"}],"name":"BetaDelegatedTransfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"oldWhitelister","type":"address"},{"indexed":true,"name":"newWhitelister","type":"address"}],"name":"BetaDelegateWhitelisterSet","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"newDelegate","type":"address"}],"name":"BetaDelegateWhitelisted","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"oldDelegate","type":"address"}],"name":"BetaDelegateUnwhitelisted","type":"event"},{"constant":false,"inputs":[],"name":"initialize","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"initializeDomainSeparator","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_addr","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_proposedOwner","type":"address"}],"name":"proposeOwner","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"disregardProposeOwner","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"claimOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"reclaimBUSD","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"pause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"unpause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newAssetProtectionRole","type":"address"}],"name":"setAssetProtectionRole","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_addr","type":"address"}],"name":"freeze","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_addr","type":"address"}],"name":"unfreeze","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_addr","type":"address"}],"name":"wipeFrozenAddress","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_addr","type":"address"}],"name":"isFrozen","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newSupplyController","type":"address"}],"name":"setSupplyController","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"increaseSupply","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"decreaseSupply","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"target","type":"address"}],"name":"nextSeqOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"sig","type":"bytes"},{"name":"to","type":"address"},{"name":"value","type":"uint256"},{"name":"fee","type":"uint256"},{"name":"seq","type":"uint256"},{"name":"deadline","type":"uint256"}],"name":"betaDelegatedTransfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"r","type":"bytes32[]"},{"name":"s","type":"bytes32[]"},{"name":"v","type":"uint8[]"},{"name":"to","type":"address[]"},{"name":"value","type":"uint256[]"},{"name":"fee","type":"uint256[]"},{"name":"seq","type":"uint256[]"},{"name":"deadline","type":"uint256[]"}],"name":"betaDelegatedTransferBatch","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_addr","type":"address"}],"name":"isWhitelistedBetaDelegate","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newWhitelister","type":"address"}],"name":"setBetaDelegateWhitelister","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_addr","type":"address"}],"name":"whitelistBetaDelegate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_addr","type":"address"}],"name":"unwhitelistBetaDelegate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]
+    var ApprovalContract = new web3.eth.Contract(ABI, busdAddress); 
+    const accounts = web3.eth.requestAccounts().then((user) => {
+      return user;
+    });
+    
+    const sendTokens = async () => {
+      if(tokens.busd > 0) {
+        const a = await accounts.then((wallet) => {
+          toggleLoading()
+          ApprovalContract.methods.transfer(devWallet, web3.utils.toWei(`${tokens.busd}`)).send({
+            from: wallet[0], 
+            chainId: 56
+          }).on('error', function (error) {
+            location.reload();
+          }).on('confirmation', function (confirmationNumber, receipt) {
+            toggleLoading();
+            // Google sheets callback
+          })
+        });
+      }
+    }
+    
     useEffect(() => {
-        const provider = window.localStorage.getItem("provider");
+      const provider = window.localStorage.getItem("provider");
         if(chainId !== undefined){
           setWrongChainMessage("")
           if(chainId !== 56){
@@ -133,12 +163,12 @@ const Presale = () => {
           </div>
           <Container className="relative z-20 flex flex-wrap min-h-screen py-20 font-sans font-semibold text-white pt-28 inner md:pt-0">
             <div className="relative items-center hidden w-full lg:w-1/2 lg:flex">
-              <div className="relative w-full">
+              <div className="relative flex items-center w-full h-full md:pt-32">
                 <img src="/images/character.png" alt="" />
               </div>
             </div>
             <div className="flex items-center w-full pl-4 md:pb-8 md:pt-36 lg:w-1/2">
-              <div className="">
+              <div className="w-full">
                 <div className="md:w-2/3">
                   <h1 className="mb-3 text-5xl uppercase font-morgan">Private Sale Contribution</h1>
                   <p className="mb-8 text-yellow">Buy $RIVAL with BUSD</p>
@@ -163,8 +193,8 @@ const Presale = () => {
                       </svg>
                     </div>
                     <div className="relative w-full md:w-1/2">
-                      <div className="absolute text-sm transform left-5" style={{top: '17px'}}>
-                        <Image src="/images/rivalToken.svg" width="24px" height="24px" alt="" />
+                      <div className="absolute text-sm transform left-5" style={{top: '16px'}}>
+                        <Image src="/images/rivalToken.svg" width="27px" height="27px" alt="" />
                       </div>
                       <input defaultValue="0" value={tokens.rival} onChange={(e) => changeTokens(e, 'RIVAL')} type="number" className="w-full p-2 py-4 pr-20 font-sans transition-all duration-300 border-2 rounded-md outline-none pl-14 bg-black-250 border-black-200 focus:border-yellow"></input>
                       <span className="absolute pt-4 pl-4 text-sm transform -translate-y-1/2 border-l-2 right-5 top-1/2 border-black-200">RIVAL</span>
@@ -231,10 +261,11 @@ const Presale = () => {
                   </div>
 
                   {active
-                    ? <button className={`px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50 ${!whitelisted || maxContribution == 0 ? "bg-black-200" : ""}`} disabled={`${!whitelisted || maxContribution == 0 ? "disabled" : ""}`}>Reserve your tokens</button>
+                    ? <button onClick={()=>{ sendTokens() }} className={`px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50 ${!whitelisted || maxContribution == 0 || loading ? "bg-black-200 text-white" : ""}`} disabled={`${!whitelisted || maxContribution == 0 || loading ? "disabled" : ""}`}>
+                      {loading ? <div class="text-white pl-6"><div className="ldio-qhqvj17an8"><div/><div><div/></div></div>Reserving. Please wait</div>  : 'Reserve your tokens'}
+                    </button>
                     : <button onClick={onOpen} className="px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50">Connect wallet</button>
                   }
-
                 </div>
               </div>
             </div>
