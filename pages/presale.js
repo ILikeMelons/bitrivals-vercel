@@ -16,6 +16,7 @@ import Navbarsale from "../components/Navbarsale"
 import Web3connect from '../components/Modals/Web3connect';
 import useLocalStorage from "../hooks/useLocalStorage";
 import { networkParams } from "../networks";
+import { checkAddress } from "../requests/presale";
 import { connectors } from "../connectors";
 import { Parallax } from 'react-parallax';
 import { getUserBalanceBNB, getUserBalanceBUSD, sendBUSDtoWallet } from "../utils/web3";
@@ -45,6 +46,7 @@ const Presale = () => {
     const [message, setMessage] = useState("");
     const [signedMessage, setSignedMessage] = useState("");
     const [verified, setVerified] = useState();
+    const [blockUser, setBlockUser] = useState(false);
     const [wrongChainMessage, setWrongChainMessage] = useState("");
     const [balance, setBalance] = useState(0);
 
@@ -127,6 +129,7 @@ const Presale = () => {
     }
     
     useEffect(() => {
+      
       const provider = window.localStorage.getItem("provider");
         if(chainId !== undefined){
           setWrongChainMessage("")
@@ -136,8 +139,14 @@ const Presale = () => {
         }
         if (provider){
            activate(connectors[provider]);
+           console.log(account)
           if (account!==undefined) {
-            getUserBalanceBUSD(account).then((bal)=> setBalance(bal)).catch(e=>console.log(e))
+            getUserBalanceBUSD(account).then((bal)=> setBalance(bal)).catch(e=>console.log(e));
+            checkAddress(account).then((response)=> {console.log(response)}).catch(e=> {
+              if(e.msg){
+                setBlockUser(true);
+              }
+            })
           }
         }else{
           disconnect();
@@ -261,7 +270,7 @@ const Presale = () => {
                   </div>
 
                   {active
-                    ? <button onClick={()=>{ sendTokens() }} className={`px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50 ${!whitelisted || maxContribution == 0 || loading ? "bg-black-200 text-white" : ""}`} disabled={`${!whitelisted || maxContribution == 0 || loading ? "disabled" : ""}`}>
+                    ? <button onClick={()=>{!blockUser ? sendTokens() : '' }} className={`px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50 ${!whitelisted || maxContribution == 0 || loading ? "bg-black-200 text-white" : ""}`} disabled={`${!whitelisted || maxContribution == 0 || loading ? "disabled" : ""}`}>
                       {loading ? <div class="text-white pl-6"><div className="ldio-qhqvj17an8"><div/><div><div/></div></div>Reserving. Please wait</div>  : 'Reserve your tokens'}
                     </button>
                     : <button onClick={onOpen} className="px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50">Connect wallet</button>
