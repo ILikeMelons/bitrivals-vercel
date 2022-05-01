@@ -25,14 +25,15 @@ import Image from "next/dist/client/image";
 
 const Presale = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    
     const {
-        library,
-        chainId,
-        account,
-        activate,
-        deactivate,
-        active
-      } = useWeb3React();
+      library,
+      chainId,
+      account,
+      activate,
+      deactivate,
+      active
+    } = useWeb3React();
 
     const [signature, setSignature] = useState("");
     const [error, setError] = useState("");
@@ -57,11 +58,46 @@ const Presale = () => {
         deactivate();
       };
 
+      const [tokens, setTokens] = useState({
+        busd: 0,
+        rival: 0
+    })
+
+    // --------------
+
+    const tokenPrice = 0.00833;
+    const contributed = 0; // Get from our sheet
+    let maxContribution = 8000; // Get from whitelist sheet
+    const whitelisted = true; // Get from whitelist sheet
+
+    // --------------
+    
+    maxContribution = maxContribution - contributed;
+    const userBUSDmax = balance.toFixed(2);
+    const maxBUSD = userBUSDmax > maxContribution ? maxContribution : userBUSDmax;
+    const maxRival = maxBUSD * (1 / tokenPrice);
+    
+    const changeTokens = (e, token) => {
+      let value = e.target.value
+      if(token == 'BUSD') {
+        if (value > maxBUSD || value > userBUSDmax) {
+          value = maxBUSD
+        }
+        setTokens({...tokens, busd: value, rival: (value * (1 / tokenPrice).toFixed(2))});
+      } else {
+        if (value > maxRival) {
+          value = maxRival
+        }
+        setTokens({...tokens, rival: value, busd: (value * tokenPrice).toFixed(2)});
+      }
+    }
+
+    const maxTokens = () => {
+      setTokens({...tokens, rival: (maxBUSD * (1 / tokenPrice).toFixed(2)), busd: maxBUSD});
+    }
+
     useEffect(() => {
         const provider = window.localStorage.getItem("provider");
-        console.log(provider);
-        console.log(chainId);
-        console.log(account);
         if(chainId !== undefined){
           setWrongChainMessage("")
           if(chainId !== 56){
@@ -72,47 +108,54 @@ const Presale = () => {
            activate(connectors[provider]);
           if (account!==undefined) {
             getUserBalanceBUSD(account).then((bal)=> setBalance(bal)).catch(e=>console.log(e))
-           
           }
         }else{
           disconnect();
         } 
-       
-        
       }, [account]);
 
-      
     return(
         <Layout>
           <Navbarsale></Navbarsale>
-          <div class="bg fixed h-full md:h-screen w-full top-0 -z-10 pointer-events-none z-10">
-            <div class="bg_sector min-w-sm" quadrant="bottom-left" style={{backgroundImage: "url('/images/background/bottom_left.png')"}} />
-            <div class="bg_sector md:block hidden" quadrant="bottom-right" style={{backgroundImage: "url('/images/background/bottom_right.png')"}} />
-            <div class="bg_sector" quadrant="top-right" style={{backgroundImage: "url('/images/background/top_right.png')"}} />
-            <div class="bg_sector" quadrant="top-left" style={{backgroundImage: "url('/images/background/top_left.png')"}} />
+          <div className="fixed top-0 z-10 w-full h-full pointer-events-none bg md:h-screen">
+            <div className="bg_sector min-w-sm" quadrant="bottom-left" style={{backgroundImage: "url('/images/background/bottom_left.png')"}} />
+            <div className="hidden bg_sector md:block" quadrant="bottom-right" style={{backgroundImage: "url('/images/background/bottom_right.png')"}} />
+            <div className="bg_sector" quadrant="top-right" style={{backgroundImage: "url('/images/background/top_right.png')"}} />
+            <div className="bg_sector" quadrant="top-left" style={{backgroundImage: "url('/images/background/top_left.png')"}} />
           </div>
-          <Container className="relative z-20 flex flex-wrap min-h-screen font-sans font-semibold text-white inner">
+          <div className="fixed z-30 w-full">
+            <Container className="relative">
+              {active
+                ? <button onClick={disconnect} className='absolute px-8 pt-3 pb-3 text-sm font-semibold rounded-md bg-yellow text-black-50 top-3 right-6'>Disconnect</button>
+                : <button onClick={onOpen} className="absolute px-8 pt-3 pb-3 text-sm font-semibold rounded-md bg-yellow text-black-50 top-3 right-6">Connect wallet</button>
+              }
+            </Container>
+          </div>
+          <Container className="relative z-20 flex flex-wrap min-h-screen py-20 font-sans font-semibold text-white pt-28 inner md:pt-0">
             <div className="relative items-center hidden w-full lg:w-1/2 lg:flex">
               <div className="relative w-full">
                 <img src="/images/character.png" alt="" />
               </div>
             </div>
-            <div className="flex items-center w-full pl-4 lg:w-1/2">
+            <div className="flex items-center w-full pl-4 md:pb-8 md:pt-36 lg:w-1/2">
               <div className="">
                 <div className="md:w-2/3">
                   <h1 className="mb-3 text-5xl uppercase font-morgan">Private Sale Contribution</h1>
                   <p className="mb-8 text-yellow">Buy $RIVAL with BUSD</p>
                 </div>
-                <div className="hidden p-3 px-4 mb-8 text-xs leading-5 text-white rounded-md bg-pink">Sorry. It looks as though your wallet has not been whitelisted. If you feel this is a mistake, please contact whoever issued you the whitelist spot or visit our <a className="underline" href="t.me/bitrivals">Telegram</a> for further support.</div>
-                <div className="opacity-100">
+                <div className={`p-3 px-4 mb-8 text-xs leading-5 text-white rounded-md bg-pink ${whitelisted ? "hidden" : ""}`}>
+                  Sorry. It looks as though your wallet has not been whitelisted. If you feel this is a mistake, please contact whoever issued you the whitelist spot or visit our <a className="underline" href="t.me/bitrivals">Telegram</a> for further support.
+                </div>
+                <div className={`${!whitelisted ? "opacity-40 pointer-events-none" : ""}`}>
                   <div className="flex flex-wrap items-center gap-5 mb-8 md:flex-nowrap">
                     <div className="relative w-full md:w-1/2">
                       <div className="absolute text-sm transform left-5" style={{top: '17px'}}>
                         <Image src="/images/busd.svg" width="24px" height="24px" alt="" />
                       </div>
-                      <input value="0" type="number" className="w-full p-2 py-4 font-sans transition-all duration-300 border-2 rounded-md outline-none pl-14 bg-black-250 border-black-200 focus:border-yellow"></input>
+                      <input defaultValue="0" value={tokens.busd} onChange={(e) => changeTokens(e, 'BUSD')} type="number" className="w-full p-2 py-4 pr-20 font-sans transition-all duration-300 border-2 rounded-md outline-none pl-14 bg-black-250 border-black-200 focus:border-yellow"></input>
                       <span className="absolute pt-4 pl-4 text-sm transform -translate-y-1/2 border-l-2 right-5 top-1/2 border-black-200">BUSD</span>
-                      <span className="absolute text-xs rounded-sm cursor-pointer right-5 top-2.5 text-yellow">max</span>
+                      <span className="absolute text-xs rounded-sm cursor-pointer right-5 top-2.5 text-yellow" onClick={(e) => maxTokens()}>max</span>
+                      <span className="absolute right-0 pt-1 text-xs rounded-sm top-16 text-yellow">Balance: <span>{(balance.toFixed(2)).toLocaleString()}</span></span>
                     </div>
                     <div className="flex justify-center w-full transform rotate-90 md:rotate-0 md:w-auto">
                       <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -123,27 +166,43 @@ const Presale = () => {
                       <div className="absolute text-sm transform left-5" style={{top: '17px'}}>
                         <Image src="/images/rivalToken.svg" width="24px" height="24px" alt="" />
                       </div>
-                      <input value="0" type="number" className="w-full p-2 py-4 font-sans transition-all duration-300 border-2 rounded-md outline-none pl-14 bg-black-250 border-black-200 focus:border-yellow"></input>
+                      <input defaultValue="0" value={tokens.rival} onChange={(e) => changeTokens(e, 'RIVAL')} type="number" className="w-full p-2 py-4 pr-20 font-sans transition-all duration-300 border-2 rounded-md outline-none pl-14 bg-black-250 border-black-200 focus:border-yellow"></input>
                       <span className="absolute pt-4 pl-4 text-sm transform -translate-y-1/2 border-l-2 right-5 top-1/2 border-black-200">RIVAL</span>
-                      <span className="absolute text-xs rounded-sm cursor-pointer right-5 top-2.5 text-yellow">max</span>
+                      <span className="absolute text-xs rounded-sm cursor-pointer right-5 top-2.5 text-yellow" onClick={(e) => maxTokens()}>max</span>
+                      <span className="absolute right-0 pt-1 text-xs rounded-sm top-16 text-yellow">Balance: <span>{(contributed * (1 / tokenPrice).toFixed(2)).toLocaleString()}</span></span>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-2 pb-8 text-sm border-b-2 border-black-200">
+                  <div className="flex flex-col gap-2 pt-8 pb-8 mt-12 text-sm border-t-2 border-b-2 border-black-200">
+                  <div className="flex justify-between w-full">
+                      <span className="text-black-150">Remaining contribution</span>
+                      <span>{maxContribution.toLocaleString()} BUSD</span>
+                    </div>
                     <div className="flex justify-between w-full">
                       <span className="text-black-150">Outgoing token</span>
-                      <span>0 BUSD</span>
+                      <span>{tokens.busd.toLocaleString()} BUSD</span>
                     </div>
                     <div className="flex justify-between w-full ">
                       <span className="text-black-150">Incoming token</span>
-                      <span>0 RIVAL</span>
+                      <span>{tokens.rival.toLocaleString()} RIVAL</span>
+                    </div>
+                    <div className="flex justify-between w-full">
+                      <span className="text-black-150">Price per token</span>
+                      <span className="text-yellow">${tokenPrice}</span>
                     </div>
                     <div className="flex justify-between w-full ">
                       <span className="text-black-150">Swap ratio</span>
-                      <span className="text-yellow">1 BUSD = ~120 RIVAL</span>
+                      <span className="text-yellow">1 BUSD = ~{Math.floor(1 / tokenPrice)} RIVAL</span>
                     </div>
                   </div>
+                  
+                    <div className={`text-xs w-full mt-8 text-blue rounded-md p-6 ${contributed != 0 ? "flex" : "hidden"}`} style={{background: '#1ebafa2b'}}>
+                    {maxContribution != 0 
+                      ? <span>You are the proud owner of {(contributed * (1 / tokenPrice).toFixed(2)).toLocaleString()} RIVAL. You may purchase up to {(maxContribution * (1 / tokenPrice).toFixed(2)).toLocaleString()} (${maxContribution.toLocaleString()}) more.</span>
+                      : <span>You have reached the maximum RIVAL you may buy at this time. Thank you very much for conributing.</span>
+                      }
+                    </div> 
                   <p className="mt-8 mb-4 text-sm">By purchasing these tokens you agree to the vesting schedule as follows</p>
-                  <ul className="flex flex-col gap-1 text-sm">
+                  <ul className="flex flex-col gap-1.5 text-sm">
                     <li className="flex items-center gap-1">
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14.25 8.74998C13.75 11.25 11.865 13.604 9.22 14.13C7.92999 14.3869 6.59181 14.2303 5.396 13.6824C4.2002 13.1345 3.20772 12.2233 2.5599 11.0786C1.91207 9.93383 1.64192 8.61387 1.78791 7.30666C1.9339 5.99944 2.48859 4.77161 3.373 3.79798C5.187 1.79998 8.25 1.24998 10.75 2.24998" stroke="#F9BA3F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -170,38 +229,17 @@ const Presale = () => {
                     <input id="terms" type="checkbox" className="w-4 h-4 border-2 rounded-sm appearance-none cursor-pointer bg-black-250 border-black-200" />
                     <label className="cursor-pointer" htmlFor="terms">I have read and agree to the terms and conditions</label>
                   </div>
-                  <button className="px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50">Reserve your tokens</button>
+
+                  {active
+                    ? <button className={`px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50 ${!whitelisted || maxContribution == 0 ? "bg-black-200" : ""}`} disabled={`${!whitelisted || maxContribution == 0 ? "disabled" : ""}`}>Reserve your tokens</button>
+                    : <button onClick={onOpen} className="px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50">Connect wallet</button>
+                  }
+
                 </div>
               </div>
             </div>
+            <Web3connect isOpen={isOpen} closeModal={onClose} />
           </Container>
-            <div className='hidden'>            
-                <div className='flex justify-center p-2'>
-
-                    {!active
-                    ? 
-                  
-                    <button onClick={onOpen} className='px-4 py-1 text-white border-2 border-white rounded-lg hover:text-pink hover:border-pink'>
-                        Connect Wallet
-                    </button> : 
-                      <div>
-                       <button onClick={disconnect} className='px-4 py-1 text-white border-2 border-white rounded-lg hover:text-pink hover:border-pink'>
-                    Disconnect
-                </button>
-                <p className="pt-2 text-white">Your address : {account && account}</p>
-                <p className="pt-2 text-white">Your balance : {balance.toFixed(2)} BUSD</p>
-                <p className="text-pink">{wrongChainMessage}</p>
-                      </div>
-                   
-                    }
-                    <Web3connect isOpen={isOpen} closeModal={onClose} />
-                    <div>
-
-                    </div>
-                </div>
-               
-            </div>
-           
         </Layout>
     );
 }

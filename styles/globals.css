@@ -435,12 +435,17 @@ input#swap:checked + div + div > div.rotator_content:nth-of-type(5) {
     display: none;
 }
 
-.nav.active {
+.nav.active,
+.nav.activeSale {
     background: #121825;
 }
 
 .nav.active .nav_inner {
     padding: 12px 1.5rem;
+}
+
+.nav.activeSale .nav_inner {
+    padding: 24px 1.5rem;
 }
 
 @media screen and (max-width: 768px) {

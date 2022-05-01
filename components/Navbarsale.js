@@ -14,9 +14,31 @@ const Navbarsale = ({user, hideLinks=false, web3=false}) => {
         await SignOut();
         router.push('/');  
     }
+
+    const [isScrollValueMoreThanHeaderHeight, setIsScrollValueMoreThanHeaderHeight] = useState(false);
+    
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrollValueMoreThanHeaderHeight(window.scrollY > 0);
+        }
+        
+        const navIcon = document.getElementsByClassName('js-navIcon')[0];
+        const nav = document.getElementsByClassName('js-nav')[0];
+    
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll);        
+    },[])
+
+    var handleSetActive = function()  {
+        const navIcon = document.getElementsByClassName('js-navIcon')[0];
+        const nav = document.getElementsByClassName('js-nav')[0];
+        
+        navIcon.classList.remove('active')
+        nav.classList.remove('active')
+    }
   
     return (
-        <section id="home" className={"transition-all duration-100 nav z-30 fixed w-full"}>
+        <section id="home" className={isScrollValueMoreThanHeaderHeight ? "transition-all duration-200 nav z-30 activeSale fixed w-full" : "transition-all duration-100 nav z-30 fixed w-full"}>
             <Container className="relative z-10 py-6 transition-all duration-100 nav_inner">
                 <div className='w-full text-white'>
                     <div className="flex items-center justify-between lg:justify-start">
