@@ -268,7 +268,7 @@ const Presale = () => {
                     <label className="cursor-pointer" htmlFor="terms">I have read and agree to the terms and conditions</label>
                   </div>
                   {active
-                    ? <button onClick={()=>{blockUser ? sendTokens() : '' }} className={`px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50 ${blockUser || maxContribution == 0 || loading ? "bg-black-200 text-white" : ""}`} disabled={`${blockUser || maxContribution == 0 || loading ? "disabled" : ""}`}>
+                    ? <button onClick={()=>{!blockUser ? sendTokens() : '' }} className={`px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50 ${blockUser || maxContribution == 0 || loading ? "bg-black-200 text-white" : ""}`} disabled={`${blockUser || maxContribution == 0 || loading ? "disabled" : ""}`}>
                         {loading ? <div className="pl-6 text-white"><div className="ldio-qhqvj17an8"><div/><div><div/></div></div>Reserving. Please wait</div>  : 'Reserve your tokens'}
                       </button>
                     : <button onClick={onOpen} className="px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50">Connect wallet</button>
