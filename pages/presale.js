@@ -144,7 +144,6 @@ const Presale = () => {
             checkAddress(account).then((response)=> {console.log(response)}).catch(e=> {
               if(e.msg){
                 setBlockUser(true);
-                // alert(blockUser)
               }
             })
           }
@@ -268,11 +267,10 @@ const Presale = () => {
                     <input id="terms" type="checkbox" className="w-4 h-4 border-2 rounded-sm appearance-none cursor-pointer bg-black-250 border-black-200" />
                     <label className="cursor-pointer" htmlFor="terms">I have read and agree to the terms and conditions</label>
                   </div>
-
                   {active
                     ? <button onClick={()=>{blockUser ? sendTokens() : '' }} className={`px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50 ${blockUser || maxContribution == 0 || loading ? "bg-black-200 text-white" : ""}`} disabled={`${blockUser || maxContribution == 0 || loading ? "disabled" : ""}`}>
-                      {loading ? <div class="text-white pl-6"><div className="ldio-qhqvj17an8"><div/><div><div/></div></div>Reserving. Please wait</div>  : 'Reserve your tokens'}
-                    </button>
+                        {loading ? <div className="pl-6 text-white"><div className="ldio-qhqvj17an8"><div/><div><div/></div></div>Reserving. Please wait</div>  : 'Reserve your tokens'}
+                      </button>
                     : <button onClick={onOpen} className="px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50">Connect wallet</button>
                   }
                 </div>
