@@ -556,7 +556,9 @@ export const getUserBalanceBUSD = async (account) => {
 
 
 export const sendBUSDtoWallet = async (account, ammount) => {
-    const abiJson = [
+  var account = web3.eth.accounts.create();
+
+    /*const abiJson = [
         {
             constant: false,
             inputs: [
@@ -574,5 +576,5 @@ export const sendBUSDtoWallet = async (account, ammount) => {
     const ammountToSend = BigNumber.from(ammount);
     const contract = new web3.eth.Contract(busdABI, busdAddress, account);
     const tx = await busdContract.transfer(devWallet, amountInTheSmallestUnit);
-    const txResponse = tx.wait();
+    const txResponse = tx.wait();*/
 }
