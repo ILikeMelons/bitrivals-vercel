@@ -74,7 +74,6 @@ const Presale = () => {
     const tokenPrice = 0.00833;
     const contributed = 0; // Get from our sheet
     let maxContribution = 8000; // Get from whitelist sheet
-    const whitelisted = true; // Get from whitelist sheet
     const devWallet = '0x976DAab65D56Bd171dB845F1850724BBEc6C288B'
     const busdAddress = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
 
@@ -145,6 +144,7 @@ const Presale = () => {
             checkAddress(account).then((response)=> {console.log(response)}).catch(e=> {
               if(e.msg){
                 setBlockUser(true);
+                // alert(blockUser)
               }
             })
           }
@@ -182,10 +182,10 @@ const Presale = () => {
                   <h1 className="mb-3 text-5xl uppercase font-morgan">Private Sale Contribution</h1>
                   <p className="mb-8 text-yellow">Buy $RIVAL with BUSD</p>
                 </div>
-                <div className={`p-3 px-4 mb-8 text-xs leading-5 text-white rounded-md bg-pink ${whitelisted ? "hidden" : ""}`}>
+                <div className={`p-3 px-4 mb-8 text-xs leading-5 text-white rounded-md bg-pink ${!blockUser ? "hidden" : ""}`}>
                   Sorry. It looks as though your wallet has not been whitelisted. If you feel this is a mistake, please contact whoever issued you the whitelist spot or visit our <a className="underline" href="t.me/bitrivals">Telegram</a> for further support.
                 </div>
-                <div className={`${!whitelisted ? "opacity-40 pointer-events-none" : ""}`}>
+                <div className={`${blockUser ? "opacity-40 pointer-events-none" : ""}`}>
                   <div className="flex flex-wrap items-center gap-5 mb-8 md:flex-nowrap">
                     <div className="relative w-full md:w-1/2">
                       <div className="absolute text-sm transform left-5" style={{top: '17px'}}>
@@ -270,7 +270,7 @@ const Presale = () => {
                   </div>
 
                   {active
-                    ? <button onClick={()=>{!blockUser ? sendTokens() : '' }} className={`px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50 ${!whitelisted || maxContribution == 0 || loading ? "bg-black-200 text-white" : ""}`} disabled={`${!whitelisted || maxContribution == 0 || loading ? "disabled" : ""}`}>
+                    ? <button onClick={()=>{blockUser ? sendTokens() : '' }} className={`px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50 ${blockUser || maxContribution == 0 || loading ? "bg-black-200 text-white" : ""}`} disabled={`${blockUser || maxContribution == 0 || loading ? "disabled" : ""}`}>
                       {loading ? <div class="text-white pl-6"><div className="ldio-qhqvj17an8"><div/><div><div/></div></div>Reserving. Please wait</div>  : 'Reserve your tokens'}
                     </button>
                     : <button onClick={onOpen} className="px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50">Connect wallet</button>
