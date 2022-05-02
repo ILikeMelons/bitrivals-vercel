@@ -445,7 +445,7 @@ input#swap:checked + div + div > div.rotator_content:nth-of-type(5) {
 }
 
 .nav.activeSale .nav_inner {
-    padding: 24px 1.5rem;
+    padding: 32px 1.5rem;
 }
 
 @media screen and (max-width: 768px) {

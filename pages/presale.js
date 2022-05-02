@@ -194,8 +194,8 @@ const Presale = () => {
           <div className="fixed z-30 w-full">
             <Container className="relative">
               {active
-                ? <button onClick={disconnect} className='absolute px-8 pt-3 pb-3 text-sm font-semibold rounded-md bg-yellow text-black-50 top-3 right-6'>Disconnect</button>
-                : <button onClick={onOpen} className="absolute px-8 pt-3 pb-3 text-sm font-semibold rounded-md bg-yellow text-black-50 top-3 right-6">Connect wallet</button>
+                ? <button onClick={disconnect} className='absolute px-8 pt-3 pb-3 text-sm font-semibold rounded-md bg-yellow text-black-50 top-5 right-6'>Disconnect</button>
+                : <button onClick={onOpen} className="absolute px-8 pt-3 pb-3 text-sm font-semibold rounded-md bg-yellow text-black-50 top-5 right-6">Connect wallet</button>
               }
             </Container>
           </div>
