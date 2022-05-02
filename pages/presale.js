@@ -95,6 +95,7 @@ const Presale = () => {
     
     const changeTokens = (e, token) => {
       let value = e.target.value
+      alert(value)
       
       if(token == 'BUSD') {
         if (value > maxBUSD || value > userBUSDmax) {
