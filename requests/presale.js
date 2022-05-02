@@ -39,3 +39,24 @@ export const checkAddress = async(address) => {
     });
   }
   
+
+  export const addAmount = async(address, ammount) => {
+    console.log(address);
+    return new Promise(async function(resolve, reject){
+      const check = await fetch('/api/presale/updateAmount', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({address : address, ammount :ammount}),
+      });
+        const result = await check.json();
+        console.log(result);
+        if(!result.bool)
+        {
+            reject({msg: 'You are not part of the private sale'});
+        }else{
+            resolve({ammount : result.ammountSpent});
+        }
+    });
+  }

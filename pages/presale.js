@@ -13,10 +13,11 @@ import {
 import { useWeb3React } from "@web3-react/core";
 import Layout from '../components/Layout'
 import Navbarsale from "../components/Navbarsale"
+import toast, { Toaster } from 'react-hot-toast';
 import Web3connect from '../components/Modals/Web3connect';
 import useLocalStorage from "../hooks/useLocalStorage";
 import { networkParams } from "../networks";
-import { checkAddress } from "../requests/presale";
+import { checkAddress, addAmount } from "../requests/presale";
 import { connectors } from "../connectors";
 import { Parallax } from 'react-parallax';
 import { getUserBalanceBNB, getUserBalanceBUSD, sendBUSDtoWallet } from "../utils/web3";
@@ -39,7 +40,7 @@ const Presale = () => {
       deactivate,
       active
     } = useWeb3React();
-
+    const notify = (msg) => toast(msg);
     const [signature, setSignature] = useState("");
     const [error, setError] = useState("");
     const [network, setNetwork] = useState(undefined);
@@ -47,6 +48,9 @@ const Presale = () => {
     const [signedMessage, setSignedMessage] = useState("");
     const [verified, setVerified] = useState();
     const [blockUser, setBlockUser] = useState(false);
+    const [contributionTotal, setContributionTotal] = useState(0);
+    const [numberConfirmation, setnumberConfirmation] = useState(0);
+    const [maxContribution, setMaxContribution] = useState(0);
     const [wrongChainMessage, setWrongChainMessage] = useState("");
     const [balance, setBalance] = useState(0);
 
@@ -73,19 +77,19 @@ const Presale = () => {
 
     const tokenPrice = 0.00833;
     const contributed = 0; // Get from our sheet
-    let maxContribution = 8000; // Get from whitelist sheet
     const devWallet = '0x976DAab65D56Bd171dB845F1850724BBEc6C288B'
     const busdAddress = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
 
     // --------------
 
-    maxContribution = maxContribution - contributed;
+    
     const userBUSDmax = balance.toFixed(2);
     const maxBUSD = userBUSDmax > maxContribution ? maxContribution : userBUSDmax;
     const maxRival = maxBUSD * (1 / tokenPrice);
     
     const changeTokens = (e, token) => {
       let value = e.target.value
+      
       if(token == 'BUSD') {
         if (value > maxBUSD || value > userBUSDmax) {
           value = maxBUSD
@@ -111,6 +115,8 @@ const Presale = () => {
     });
     
     const sendTokens = async () => {
+      
+
       if(tokens.busd > 0) {
         const a = await accounts.then((wallet) => {
           toggleLoading()
@@ -120,8 +126,23 @@ const Presale = () => {
           }).on('error', function (error) {
             location.reload();
           }).on('confirmation', function (confirmationNumber, receipt) {
-            toggleLoading();
-            // Google sheets callback
+            setnumberConfirmation(confirmationNumber);
+            if(confirmationNumber===24){
+             
+              console.log(confirmationNumber)
+              const ammountReallySent = receipt.events.Transfer.returnValues.value/1e18;
+              // add amount to google sheets
+              addAmount(account,ammountReallySent).then((response)=>{
+                setContributionTotal(response.ammount);
+                toggleLoading();
+              }).catch((e)=>{
+                console.log(e);
+                toggleLoading();
+              })
+            }
+            
+            
+            
           })
         });
       }
@@ -141,11 +162,15 @@ const Presale = () => {
            console.log(account)
           if (account!==undefined) {
             getUserBalanceBUSD(account).then((bal)=> setBalance(bal)).catch(e=>console.log(e));
-            checkAddress(account).then((response)=> {console.log(response)}).catch(e=> {
+            checkAddress(account).then((response)=> {
+               if(!response.bool){ setBlockUser(true);}
+              setContributionTotal(response.ammountSpent);
+              setMaxContribution(response.maxContribution);
+            }).catch(e=> {
               if(e.msg){
                 setBlockUser(true);
               }
-            })
+            }) 
           }
         }else{
           disconnect();
@@ -207,13 +232,13 @@ const Presale = () => {
                       <input defaultValue="0" value={tokens.rival} onChange={(e) => changeTokens(e, 'RIVAL')} type="number" className="w-full p-2 py-4 pr-20 font-sans transition-all duration-300 border-2 rounded-md outline-none pl-14 bg-black-250 border-black-200 focus:border-yellow"></input>
                       <span className="absolute pt-4 pl-4 text-sm transform -translate-y-1/2 border-l-2 right-5 top-1/2 border-black-200">RIVAL</span>
                       <span className="absolute text-xs rounded-sm cursor-pointer right-5 top-2.5 text-yellow" onClick={(e) => maxTokens()}>max</span>
-                      <span className="absolute right-0 pt-1 text-xs rounded-sm top-16 text-yellow">Balance: <span>{(contributed * (1 / tokenPrice).toFixed(2)).toLocaleString()}</span></span>
+                      <span className="absolute right-0 pt-1 text-xs rounded-sm top-16 text-yellow">Balance: <span>{(contributionTotal * (1 / tokenPrice).toFixed(2)).toLocaleString()}</span></span>
                     </div>
                   </div>
                   <div className="flex flex-col gap-2 pt-8 pb-8 mt-12 text-sm border-t-2 border-b-2 border-black-200">
                   <div className="flex justify-between w-full">
                       <span className="text-black-150">Remaining contribution</span>
-                      <span>{maxContribution.toLocaleString()} BUSD</span>
+                      <span>{(maxContribution-contributionTotal).toLocaleString()} BUSD</span>
                     </div>
                     <div className="flex justify-between w-full">
                       <span className="text-black-150">Outgoing token</span>
@@ -235,7 +260,7 @@ const Presale = () => {
                   
                     <div className={`text-xs w-full mt-8 text-blue rounded-md p-6 ${contributed != 0 ? "flex" : "hidden"}`} style={{background: '#1ebafa2b'}}>
                     {maxContribution != 0 
-                      ? <span>You are the proud owner of {(contributed * (1 / tokenPrice).toFixed(2)).toLocaleString()} RIVAL. You may purchase up to {(maxContribution * (1 / tokenPrice).toFixed(2)).toLocaleString()} (${maxContribution.toLocaleString()}) more.</span>
+                      ? <span>You are the proud owner of {(contributionTotal * (1 / tokenPrice).toFixed(2)).toLocaleString()} RIVAL. You may purchase up to {(maxContribution * (1 / tokenPrice).toFixed(2)).toLocaleString()} (${maxContribution.toLocaleString()}) more.</span>
                       : <span>You have reached the maximum RIVAL you may buy at this time. Thank you very much for conributing.</span>
                       }
                     </div> 
@@ -269,7 +294,7 @@ const Presale = () => {
                   </div>
                   {active
                     ? <button onClick={()=>{!blockUser ? sendTokens() : '' }} className={`px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50 ${blockUser || maxContribution == 0 || loading ? "bg-black-200 text-white" : ""}`} disabled={`${blockUser || maxContribution == 0 || loading ? "disabled" : ""}`}>
-                        {loading ? <div className="pl-6 text-white"><div className="ldio-qhqvj17an8"><div/><div><div/></div></div>Reserving. Please wait</div>  : 'Reserve your tokens'}
+                        {loading ? <div className="pl-6 text-white"><div className="ldio-qhqvj17an8"><div/><div><div/></div></div>Reserving. Please wait {numberConfirmation}/24</div>  : 'Reserve your tokens'}
                       </button>
                     : <button onClick={onOpen} className="px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50">Connect wallet</button>
                   }
