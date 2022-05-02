@@ -43,6 +43,7 @@
     "react-hot-toast": "^2.2.0",
     "react-hotjar": "^4.0.0",
     "react-in-viewport": "^1.0.0-alpha.20",
+    "react-modal": "^3.15.1",
     "react-scroll": "^1.8.4",
     "truffle": "^5.5.7",
     "valve-steam-web-api": "^1.2.1",

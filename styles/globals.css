@@ -619,3 +619,8 @@ input[id="terms"]:checked:after {
   .chakra-ui-light {
       background: #141c2d
   }
+
+  .ReactModalPortal {
+      z-index: 40;
+      position: relative;
+  }
