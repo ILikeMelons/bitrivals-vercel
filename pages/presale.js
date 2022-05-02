@@ -205,7 +205,7 @@ const Presale = () => {
                 <img src="/images/character.png" alt="" />
               </div>
             </div>
-            <div className="flex items-center w-full pl-4 md:pb-8 md:pt-36 lg:w-1/2">
+            <div className="flex items-center w-full md:pl-4 md:pb-8 md:pt-36 lg:w-1/2">
               <div className="w-full">
                 <div className="md:w-2/3">
                   <h1 className="mb-3 text-5xl uppercase font-morgan">Private Sale Contribution</h1>
