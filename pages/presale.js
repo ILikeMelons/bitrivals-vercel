@@ -94,11 +94,9 @@ const Presale = () => {
     const maxRival = maxBUSD * (1 / tokenPrice);
     
     const changeTokens = (e, token) => {
-      let value = e.target.value
-      
-      
+      let value = parseInt(e.target.value);
+      console.log(value)
       if(token == 'BUSD') {
-        alert(value, maxBUSD, userBUSDmax)
         if (value > maxBUSD || value > userBUSDmax) {
           value = maxBUSD
         }
@@ -372,7 +370,7 @@ const Presale = () => {
                       <div className="absolute text-sm transform left-5" style={{top: '16px'}}>
                         <Image src="/images/rivalToken.svg" width="27px" height="27px" alt="" />
                       </div>
-                      <input value={tokens.rival.toFixed(2)} onChange={(e) => changeTokens(e, 'RIVAL')} type="number" className="w-full p-2 py-4 pr-20 font-sans transition-all duration-300 border-2 rounded-md outline-none pl-14 bg-black-250 border-black-200 focus:border-yellow"></input>
+                      <input value={tokens.rival} onChange={(e) => changeTokens(e, 'RIVAL')} type="number" className="w-full p-2 py-4 pr-20 font-sans transition-all duration-300 border-2 rounded-md outline-none pl-14 bg-black-250 border-black-200 focus:border-yellow"></input>
                       <span className="absolute pt-4 pl-4 text-sm transform -translate-y-1/2 border-l-2 right-5 top-1/2 border-black-200">RIVAL</span>
                       <span className="absolute text-xs rounded-sm cursor-pointer right-5 top-2.5 text-yellow" onClick={(e) => maxTokens()}>max</span>
                       <span className="absolute right-0 pt-1 text-xs rounded-sm top-16 text-yellow">Balance: <span>{(contributionTotal * (1 / tokenPrice).toFixed(2)).toLocaleString()}</span></span>
