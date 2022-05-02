@@ -24,7 +24,7 @@ export const checkAddress = async(address) => {
     if(address === cellA.value ){
       var ammountSpent = 0; 
       if(cellC.value !== null){
-        ammountSpent = parseInt(cellC.value);
+        ammountSpent = parseFloat(cellC.value);
       } 
       return {bool : true, ammountSpent : ammountSpent, maxContribution: cellB.value};
     }
@@ -46,9 +46,9 @@ export const addValueSpent = async(address, ammountAdded)=>{
       var ammount = 0;
       var total = 0;
       if(cellC.value !== null){
-        ammount = parseInt(cellC.value);
+        ammount = parseFloat(cellC.value);
       }
-      total = ammount + parseInt(ammountAdded);
+      total = ammount + parseFloat(ammountAdded);
       cellC.value = total;
       await sheet.saveUpdatedCells();
       return {bool : true, ammountSpent : total};
