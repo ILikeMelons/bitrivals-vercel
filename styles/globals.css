@@ -569,7 +569,7 @@ input[id="terms"]:checked:after {
     width: 32px;
     height: 32px;
     top: -2px;
-    left: -224px;
+    left: -256px;
     right: 0;
     margin: auto;
     border-radius: 50%;

@@ -30,6 +30,12 @@ const Presale = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [loading, setLoading] = useState(false);
     const toggleLoading = () => setLoading(value => !value);
+
+    const [terms, setTerms] = useState(false);
+    const toggleTerms = () => setTerms(value => !value);
+
+    const [validation, setValidation] = useState(false);
+    const showValidation = (v) => setValidation(value => v);
     
     const {
       library,
@@ -80,7 +86,6 @@ const Presale = () => {
 
     // --------------
 
-    
     const userBUSDmax = balance.toFixed(2);
     const maxBUSD = userBUSDmax > maxContribution ? maxContribution : userBUSDmax;
     const maxRival = maxBUSD * (1 / tokenPrice);
@@ -112,34 +117,36 @@ const Presale = () => {
       return user;
     });
     
-    
-
     const sendTokens = async () => {
-      
-      if(tokens.busd > 0) {
-        const a = await accounts.then((wallet) => {
-          toggleLoading()
-          ApprovalContract.methods.transfer(devWallet, web3.utils.toWei(`${tokens.busd}`)).send({
-            from: wallet[0], 
-            chainId: 56
-          }).on('error', function (error) {
-            location.reload();
-          }).on('confirmation', function (confirmationNumber, receipt) {
-            setnumberConfirmation(confirmationNumber);
-            if(confirmationNumber===1){
-              const ammountReallySent = receipt.events.Transfer.returnValues.value/1e18;
-              // add amount to google sheets
-              addAmount(account,ammountReallySent).then((response)=>{
-                setContributionTotal(response.ammount);
-              }).catch((e)=>{
-                console.log(e)
-              })
-            }
-            if(confirmationNumber===6){
-              toggleLoading();
-            }
-          })
-        });
+      if(terms) {
+        if(tokens.busd > 0) {
+          showValidation(false);
+          const a = await accounts.then((wallet) => {
+            toggleLoading()
+            ApprovalContract.methods.transfer(devWallet, web3.utils.toWei(`${tokens.busd}`)).send({
+              from: wallet[0], 
+              chainId: 56
+            }).on('error', function (error) {
+              location.reload();
+            }).on('confirmation', function (confirmationNumber, receipt) {
+              setnumberConfirmation(confirmationNumber);
+              if(confirmationNumber===1){
+                const ammountReallySent = receipt.events.Transfer.returnValues.value/1e18;
+                // add amount to google sheets
+                addAmount(account,ammountReallySent).then((response)=>{
+                  setContributionTotal(response.ammount);
+                }).catch((e)=>{
+                  console.log(e)
+                })
+              }
+              if(confirmationNumber===6){
+                toggleLoading();
+              }
+            })
+          });
+        }
+      } else {
+        showValidation(true);
       }
     }
   
@@ -228,7 +235,7 @@ const Presale = () => {
                       <div className="absolute text-sm transform left-5" style={{top: '16px'}}>
                         <Image src="/images/rivalToken.svg" width="27px" height="27px" alt="" />
                       </div>
-                      <input defaultValue="0" value={tokens.rival} onChange={(e) => changeTokens(e, 'RIVAL')} type="number" className="w-full p-2 py-4 pr-20 font-sans transition-all duration-300 border-2 rounded-md outline-none pl-14 bg-black-250 border-black-200 focus:border-yellow"></input>
+                      <input defaultValue="0" value={tokens.rival.toFixed(2)} onChange={(e) => changeTokens(e, 'RIVAL')} type="number" className="w-full p-2 py-4 pr-20 font-sans transition-all duration-300 border-2 rounded-md outline-none pl-14 bg-black-250 border-black-200 focus:border-yellow"></input>
                       <span className="absolute pt-4 pl-4 text-sm transform -translate-y-1/2 border-l-2 right-5 top-1/2 border-black-200">RIVAL</span>
                       <span className="absolute text-xs rounded-sm cursor-pointer right-5 top-2.5 text-yellow" onClick={(e) => maxTokens()}>max</span>
                       <span className="absolute right-0 pt-1 text-xs rounded-sm top-16 text-yellow">Balance: <span>{(contributionTotal * (1 / tokenPrice).toFixed(2)).toLocaleString()}</span></span>
@@ -288,8 +295,8 @@ const Presale = () => {
                     </li>
                   </ul>
                   <div className="flex items-center gap-2 mt-8 text-sm">
-                    <input id="terms" type="checkbox" className="w-4 h-4 border-2 rounded-sm appearance-none cursor-pointer bg-black-250 border-black-200" />
-                    <label className="cursor-pointer" htmlFor="terms">I have read and agree to the terms and conditions</label>
+                    <input onClick={()=>{toggleTerms()}} id="terms" type="checkbox" className="w-4 h-4 border-2 rounded-sm appearance-none cursor-pointer bg-black-250 border-black-200" />
+                    <label className="cursor-pointer" htmlFor="terms">I have read and agree to the <a href="#" className="underline text-yellow">terms and conditions</a></label>
                   </div>
                   
                   {active
@@ -298,6 +305,9 @@ const Presale = () => {
                       </button>
                     : <button onClick={onOpen} className="px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50">Connect wallet</button>
                   }
+
+                  {validation ? <p className="mt-3 text-sm text-yellow">Please accept the terms and conditions and make sure you have a value in the BUSD input before continuing.</p> : ''}
+                  
                 </div>
               </div>
             </div>
