@@ -7,7 +7,7 @@ export default async function loginUser(req, res) {
     // destructure the e-mail and password received in the request body.
     const { email, password } = req.body
    
-    //console.log(email);
+    //(email);
   
     let { user, error } = await signInUser({
       email: email,

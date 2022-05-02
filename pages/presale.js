@@ -136,7 +136,7 @@ const Presale = () => {
                 addAmount(account,ammountReallySent).then((response)=>{
                   setContributionTotal(response.ammount);
                 }).catch((e)=>{
-                  console.log(e)
+                
                 })
               }
               if(confirmationNumber===6){
@@ -163,9 +163,8 @@ const Presale = () => {
         }
         if (provider){
            activate(connectors[provider]);
-           console.log(account)
           if (account!==undefined) {
-            getUserBalanceBUSD(account).then((bal)=> setBalance(bal)).catch(e=>console.log(e));
+            getUserBalanceBUSD(account).then((bal)=> setBalance(bal))
             checkAddress(account).then((response)=> {
                if(!response.bool){ setBlockUser(true);}
               setContributionTotal(response.ammountSpent);
@@ -221,7 +220,7 @@ const Presale = () => {
                       <div className="absolute text-sm transform left-5" style={{top: '17px'}}>
                         <Image src="/images/busd.svg" width="24px" height="24px" alt="" />
                       </div>
-                      <input defaultValue="0" value={tokens.busd} onChange={(e) => changeTokens(e, 'BUSD')} type="number" className="w-full p-2 py-4 pr-20 font-sans transition-all duration-300 border-2 rounded-md outline-none pl-14 bg-black-250 border-black-200 focus:border-yellow"></input>
+                      <input value={tokens.busd} onChange={(e) => changeTokens(e, 'BUSD')} type="number" className="w-full p-2 py-4 pr-20 font-sans transition-all duration-300 border-2 rounded-md outline-none pl-14 bg-black-250 border-black-200 focus:border-yellow"></input>
                       <span className="absolute pt-4 pl-4 text-sm transform -translate-y-1/2 border-l-2 right-5 top-1/2 border-black-200">BUSD</span>
                       <span className="absolute text-xs rounded-sm cursor-pointer right-5 top-2.5 text-yellow" onClick={(e) => maxTokens()}>max</span>
                       <span className="absolute right-0 pt-1 text-xs rounded-sm top-16 text-yellow">Balance: <span>{(balance.toFixed(2)).toLocaleString()}</span></span>
@@ -235,7 +234,7 @@ const Presale = () => {
                       <div className="absolute text-sm transform left-5" style={{top: '16px'}}>
                         <Image src="/images/rivalToken.svg" width="27px" height="27px" alt="" />
                       </div>
-                      <input defaultValue="0" value={tokens.rival.toFixed(2)} onChange={(e) => changeTokens(e, 'RIVAL')} type="number" className="w-full p-2 py-4 pr-20 font-sans transition-all duration-300 border-2 rounded-md outline-none pl-14 bg-black-250 border-black-200 focus:border-yellow"></input>
+                      <input value={tokens.rival.toFixed(2)} onChange={(e) => changeTokens(e, 'RIVAL')} type="number" className="w-full p-2 py-4 pr-20 font-sans transition-all duration-300 border-2 rounded-md outline-none pl-14 bg-black-250 border-black-200 focus:border-yellow"></input>
                       <span className="absolute pt-4 pl-4 text-sm transform -translate-y-1/2 border-l-2 right-5 top-1/2 border-black-200">RIVAL</span>
                       <span className="absolute text-xs rounded-sm cursor-pointer right-5 top-2.5 text-yellow" onClick={(e) => maxTokens()}>max</span>
                       <span className="absolute right-0 pt-1 text-xs rounded-sm top-16 text-yellow">Balance: <span>{(contributionTotal * (1 / tokenPrice).toFixed(2)).toLocaleString()}</span></span>
@@ -289,7 +288,7 @@ const Presale = () => {
                     <li className="flex items-center gap-1">
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14.25 8.74998C13.75 11.25 11.865 13.604 9.22 14.13C7.92999 14.3869 6.59181 14.2303 5.396 13.6824C4.2002 13.1345 3.20772 12.2233 2.5599 11.0786C1.91207 9.93383 1.64192 8.61387 1.78791 7.30666C1.9339 5.99944 2.48859 4.77161 3.373 3.79798C5.187 1.79998 8.25 1.24998 10.75 2.24998" stroke="#F9BA3F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M5.75 7.75L8.25 10.25L14.25 3.75" stroke="#F9BA3F" strokeWidth="1.5" stroke-strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M5.75 7.75L8.25 10.25L14.25 3.75" stroke="#F9BA3F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                       10% monthly unlock
                     </li>

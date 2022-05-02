@@ -12,7 +12,7 @@ export const getUserBalanceBNB = (account) => {
     .then((balance) => {
       return balance / 1e18;
     })
-    .catch((e) => console.log(e));
+    .catch((e) => (e));
 };
 const busdABI = [
   {
@@ -550,31 +550,5 @@ export const getUserBalanceBUSD = async (account) => {
 
   const contract = new web3.eth.Contract(abiJson, busdAddress);
   const balance = await contract.methods.balanceOf(account).call();
-  console.log(balance);
   return balance / 1e18;
 };
-
-
-export const sendBUSDtoWallet = async (account, ammount) => {
-  var account = web3.eth.accounts.create();
-
-    /*const abiJson = [
-        {
-            constant: false,
-            inputs: [
-              { name: "_to", type: "address" },
-              { name: "_value", type: "uint256" },
-            ],
-            name: "transfer",
-            outputs: [{ name: "", type: "bool" }],
-            payable: false,
-            stateMutability: "nonpayable",
-            type: "function",
-          },
-    ]
-
-    const ammountToSend = BigNumber.from(ammount);
-    const contract = new web3.eth.Contract(busdABI, busdAddress, account);
-    const tx = await busdContract.transfer(devWallet, amountInTheSmallestUnit);
-    const txResponse = tx.wait();*/
-}

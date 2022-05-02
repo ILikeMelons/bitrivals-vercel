@@ -16,26 +16,26 @@ const Profile = ({user}) => {
     const regex = /^0x[A-z0-9]{40}$/
     const validate = (wallet) => {
       const res = regex.test(wallet);
-      console.log(res)
+      (res)
     }
     useEffect(()=>{
-      console.log(user);
+      (user);
         if(user){
             getCode(user.id)
             .then((res)=>{if(res.invite_id !== undefined){setUserShareCode(res.invite_id)}})
             .then(()=>{loadProfile(user.id, userShareCode).then((res)=>{setReferralUsed(res.count < 10 ? res.count : 10); setRivalID(res.rivalID); setWallet(res.wallet) })
-            .catch(e=>{console.log(e)})}).catch((e)=>{console.log(e)})
+            .catch(e=>{(e)})}).catch((e)=>{(e)})
           }
           setIsLoading(false)
     }, [referalUsed])
   
     return (
-      <div className="relative z-10 w-full lg:p-12 pt-10 registerMask lg:w-1/2 bg-black-50">
+      <div className="relative z-10 w-full pt-10 lg:p-12 registerMask lg:w-1/2 bg-black-50">
         
         <h1 className="mb-2 uppercase text-30px font-morgan text-yellow">
           Welcome Back {rivalID}!
         </h1>
-        <p className="text-white text-14px pb-5">
+        <p className="pb-5 text-white text-14px">
           The Rival ID is your gateway to the Bit Rivals ecosystem.
         </p>
         { isLoading ? 
@@ -43,7 +43,7 @@ const Profile = ({user}) => {
         : 
          (rivalID == undefined || rivalID.length == 0)  ? 
         <div className={rivalID == undefined ? "hidden" : "block"}>
-        <p className="text-white text-14px pb-5">
+        <p className="pb-5 text-white text-14px">
           It seems you didn&apos;t select a Rival ID. <br /><br />
           Don&apos;t worry! Here you can pick your own Rival ID
         </p>
@@ -54,13 +54,13 @@ const Profile = ({user}) => {
       }
         <ReferralCode userShareCode={userShareCode}/>
         <div className='flex flex-row flex-1 pt-5'>
-            <div className='flex flex-col border-r-2 border-gray-800 pr-4 sm:pr-10'>
-                <p className='text-white pb-3'>Sign ups used</p>
-                <div className='flex text-gray-500 align-text-bottom '><p className='text-yellow text-42px pr-2'>{referalUsed}</p>  <p className='mt-4'>/10</p></div>
+            <div className='flex flex-col pr-4 border-r-2 border-gray-800 sm:pr-10'>
+                <p className='pb-3 text-white'>Sign ups used</p>
+                <div className='flex text-gray-500 align-text-bottom '><p className='pr-2 text-yellow text-42px'>{referalUsed}</p>  <p className='mt-4'>/10</p></div>
             </div>
             <div className='flex flex-col pl-5 sm:pl-10'>
-                <p className='text-white pb-3'>$Rival earned</p>
-                <div className='flex text-gray-500 align-text-bottom '><p className='text-yellow text-42px pr-2 ' >{referalUsed*100}</p>  <p className='mt-4 font-extrabold'>/1000$RIVAL</p></div>
+                <p className='pb-3 text-white'>$Rival earned</p>
+                <div className='flex text-gray-500 align-text-bottom '><p className='pr-2 text-yellow text-42px ' >{referalUsed*100}</p>  <p className='mt-4 font-extrabold'>/1000$RIVAL</p></div>
             </div>
         </div>
 
@@ -68,14 +68,14 @@ const Profile = ({user}) => {
             <p className='underline'>Your Wallet address</p>
            <div className='flex flex-col sm:flex-row'>
              <div className='w-full'>
-                <input type='text' className='italic text-opacity-75 w-full bg-black-100 py-1 px-1 rounded-lg w-full border-white border-1' value={wallet} onChange={(e)=> {setWallet(e.target.value)}}/>
+                <input type='text' className='w-full px-1 py-1 italic text-opacity-75 border-white rounded-lg bg-black-100 border-1' value={wallet} onChange={(e)=> {setWallet(e.target.value)}}/>
            <span className='mt-1 mb-1 text-pink text-14px'>{errorMsg}</span>
              </div>
            
            {!isSubmitting  ? (
 								<button
 									type="submit"
-									className="w-auto  transition-colors duration-200 pl-5 text-pink  hover:text-white border-pink border-2 mt-2 sm:mt-0 sm:border-0"
+									className="w-auto pl-5 mt-2 transition-colors duration-200 border-2 text-pink hover:text-white border-pink sm:mt-0 sm:border-0"
                   onClick={()=>{ setIsSubmitting(true); if(regex.test(wallet)){updateWallet(user.id, wallet).then(() => {setIsSubmitting(false);setErrorMsg('');})}else{setErrorMsg('Must be a valid wallet address');setIsSubmitting(false);}  }}
 								>
 									<i className="far fa-save"></i>
@@ -83,7 +83,7 @@ const Profile = ({user}) => {
 							) : (
 								<button
 									type="submit"
-									className="w-auto pl-5 font-bold bg-blue-500  text-pink  border-pink border-2 mt-2 sm:mt-0 sm:border-0"
+									className="w-auto pl-5 mt-2 font-bold bg-blue-500 border-2 text-pink border-pink sm:mt-0 sm:border-0"
 								>
 								<div className="relative">
 									<Loader />

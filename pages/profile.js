@@ -11,7 +11,7 @@ export default function Profile({data}) {
     const { user } = useUser();
     useEffect(()=>{
         const params = new URL(location.href).searchParams;
-        console.log(user);
+        (user);
         setSteamId(params.get('steam_id'));
         setSteamName(params.get('steam_name'))
     })
@@ -40,7 +40,7 @@ const UserProfile = ({name, id}) => {
             <a href={'/api/auth0/steam'} ><div className="border-2 rounded-lg p-2 cursor-pointer">Link account to<br/> Steam</div></a>
           </div>
           
-            <div className="pt-10" onClick={()=> { loadDotaMatchHistory('').then((res)=>{setMatchResult(res); console.log(matchRes.matches)})}}>
+            <div className="pt-10" onClick={()=> { loadDotaMatchHistory('').then((res)=>{setMatchResult(res); (matchRes.matches)})}}>
                 Load game data
             </div>
             <div className="pt-5 text-white">

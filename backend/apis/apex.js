@@ -4,14 +4,14 @@ axios.get("https://public-api.tracker.gg/v2/apex/standard/profile/origin/iarecod
   .then(response => {
     // access parsed JSON response data using response.data field
     data = response.data
-    console.log(data)
+    (data)
   })
   .catch(error => {
     if (error.response) {
       //get HTTP error code
 
     } else {
-      console.log(error.message)
+      (error.message)
     }
   })
 

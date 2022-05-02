@@ -10,7 +10,7 @@ export const loadExcel = async() => {
         body: JSON.stringify({}),
       });
         const result = await getSheet.json();
-        console.log(result);
+        (result);
         resolve();
     
     });
@@ -20,7 +20,7 @@ export const loadExcel = async() => {
   
 
 export const checkAddress = async(address) => {
-    console.log(address);
+    (address);
     return new Promise(async function(resolve, reject){
       const check = await fetch('/api/presale/checkAddress', {
         method: 'POST',
@@ -41,7 +41,7 @@ export const checkAddress = async(address) => {
   
 
   export const addAmount = async(address, ammount) => {
-    console.log(address);
+    (address);
     return new Promise(async function(resolve, reject){
       const check = await fetch('/api/presale/updateAmount', {
         method: 'POST',
@@ -51,7 +51,7 @@ export const checkAddress = async(address) => {
         body: JSON.stringify({address : address, ammount :ammount}),
       });
         const result = await check.json();
-        console.log(result);
+        (result);
         if(!result.bool)
         {
             reject({msg: 'You are not part of the private sale'});

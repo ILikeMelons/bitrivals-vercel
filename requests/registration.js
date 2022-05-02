@@ -28,7 +28,7 @@ export const submitWalletAddress =  async(id, walletAddress) => {
       method: "POST",
     });
     const result =await response.json();
-    //console.log(result);
+    //(result);
     if(result.statusText == 'OK'){
       resolve('Address added successfully!')
     }

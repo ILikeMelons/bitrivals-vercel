@@ -10,7 +10,7 @@ export const loadDotaMatchHistory =  async(steam_id) => {
         method: "POST",
       })
       const result = await response.json();
-      console.log(result)
+      (result)
      
       if(result.status==1){
         resolve({matches : result.matches, total : result.total_results})

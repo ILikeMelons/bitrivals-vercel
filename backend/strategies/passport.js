@@ -13,7 +13,7 @@ passport.use(new BnetStrategy({
     region: "us",
     scope: "openid profile email"
 }, function(accessToken, refreshToken, profile, done) {
-    console.log(profile)
+    (profile)
     return done(null, profile);
 }));
 
@@ -23,7 +23,7 @@ passport.use(new SteamStrategy({
     apiKey: process.env.STEAM_API_KEY
   },
   function(identifier, profile, done) {
-      console.log(identifier)
+      (identifier)
     profile.identifier = identifier;
     return done(null, profile);
   }
