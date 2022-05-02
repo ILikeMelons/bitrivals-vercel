@@ -124,8 +124,10 @@ const Presale = () => {
       if(terms) {
         if(tokens.busd > 0) {
           showValidation(false);
+          alert('here')
+          alert(accounts)
           const a = await accounts.then((wallet) => {
-            alert(wallet)
+            
             toggleLoading()
             ApprovalContract.methods.transfer(devWallet, web3.utils.toWei(`${tokens.busd}`)).send({
               from: wallet[0], 
