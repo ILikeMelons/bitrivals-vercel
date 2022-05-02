@@ -13,7 +13,6 @@ import {
 import { useWeb3React } from "@web3-react/core";
 import Layout from '../components/Layout'
 import Navbarsale from "../components/Navbarsale"
-import toast, { Toaster } from 'react-hot-toast';
 import Web3connect from '../components/Modals/Web3connect';
 import useLocalStorage from "../hooks/useLocalStorage";
 import { networkParams } from "../networks";
@@ -40,7 +39,7 @@ const Presale = () => {
       deactivate,
       active
     } = useWeb3React();
-    const notify = (msg) => toast(msg);
+   
     const [signature, setSignature] = useState("");
     const [error, setError] = useState("");
     const [network, setNetwork] = useState(undefined);
@@ -74,7 +73,6 @@ const Presale = () => {
     })
 
     // --------------
-
     const tokenPrice = 0.00833;
     const contributed = 0; // Get from our sheet
     const devWallet = '0x976DAab65D56Bd171dB845F1850724BBEc6C288B'
@@ -114,9 +112,10 @@ const Presale = () => {
       return user;
     });
     
+    
+
     const sendTokens = async () => {
       
-
       if(tokens.busd > 0) {
         const a = await accounts.then((wallet) => {
           toggleLoading()
@@ -127,26 +126,24 @@ const Presale = () => {
             location.reload();
           }).on('confirmation', function (confirmationNumber, receipt) {
             setnumberConfirmation(confirmationNumber);
-            if(confirmationNumber===24){
-             
-              console.log(confirmationNumber)
+            if(confirmationNumber===1){
               const ammountReallySent = receipt.events.Transfer.returnValues.value/1e18;
               // add amount to google sheets
               addAmount(account,ammountReallySent).then((response)=>{
                 setContributionTotal(response.ammount);
-                toggleLoading();
               }).catch((e)=>{
-                console.log(e);
-                toggleLoading();
+                console.log(e)
               })
             }
-            
-            
-            
+            if(confirmationNumber===6){
+              toggleLoading();
+            }
           })
         });
       }
     }
+  
+
     
     useEffect(() => {
       
@@ -179,7 +176,9 @@ const Presale = () => {
 
     return(
         <Layout>
+         
           <Navbarsale></Navbarsale>
+         
           <div className="fixed top-0 z-10 w-full h-full pointer-events-none bg md:h-screen">
             <div className="bg_sector min-w-sm" quadrant="bottom-left" style={{backgroundImage: "url('/images/background/bottom_left.png')"}} />
             <div className="hidden bg_sector md:block" quadrant="bottom-right" style={{backgroundImage: "url('/images/background/bottom_right.png')"}} />
@@ -292,9 +291,10 @@ const Presale = () => {
                     <input id="terms" type="checkbox" className="w-4 h-4 border-2 rounded-sm appearance-none cursor-pointer bg-black-250 border-black-200" />
                     <label className="cursor-pointer" htmlFor="terms">I have read and agree to the terms and conditions</label>
                   </div>
+                  
                   {active
-                    ? <button onClick={()=>{!blockUser ? sendTokens() : '' }} className={`px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50 ${blockUser || maxContribution == 0 || loading ? "bg-black-200 text-white" : ""}`} disabled={`${blockUser || maxContribution == 0 || loading ? "disabled" : ""}`}>
-                        {loading ? <div className="pl-6 text-white"><div className="ldio-qhqvj17an8"><div/><div><div/></div></div>Reserving. Please wait {numberConfirmation}/24</div>  : 'Reserve your tokens'}
+                    ? <button onClick={()=>{!blockUser ? sendTokens() : ''}} className={`px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50 ${blockUser || maxContribution == 0 || loading ? "bg-black-200 text-white" : ""}`} disabled={`${blockUser || maxContribution == 0 || loading ? "disabled" : ""}`}>
+                        {loading ? <div className="pl-6 text-white"><div className="ldio-qhqvj17an8"><div/><div><div/></div></div>Reserving. Please wait... {numberConfirmation}/6</div>  : 'Reserve your tokens'}
                       </button>
                     : <button onClick={onOpen} className="px-8 pt-3 pb-3 mt-8 text-sm font-semibold rounded-md bg-yellow text-black-50">Connect wallet</button>
                   }
@@ -303,8 +303,11 @@ const Presale = () => {
             </div>
             <Web3connect isOpen={isOpen} closeModal={onClose} />
           </Container>
+         
         </Layout>
     );
 }
+
+
 
 export default Presale;
