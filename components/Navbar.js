@@ -120,7 +120,7 @@ const Navbar = ({user, hideLinks=false, web3=false}) => {
                         ) : (
                     <div className='flex flex-col pl-6 mt-12 lg:mt-0 lg:items-center lg:flex-row text-32px lg:text-14px lg:pl-0'>
         
-                    <span className='flex text-white transition-all duration-200 cursor-pointer hover:text-pink' onClick={() => {router.push('/login')}}><div className="mr-1"><Image src={RedTri.src} width={`10vw`} height={`10vw`} /></div><span>Log In</span></span> 
+                    <span className='flex text-white transition-all duration-200 cursor-pointer hover:text-pink' onClick={() => { window.location.href='https://app.bitrivals.gg/login'}}><div className="mr-1"><Image src={RedTri.src} width={`10vw`} height={`10vw`} /></div><span>Log In</span></span> 
                     
                     <div className='py-4'>
                         <div className='text-white rounded-lg cursor-pointer bg-AzureRadiance'>
